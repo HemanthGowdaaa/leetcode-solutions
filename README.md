@@ -19,8 +19,13 @@
 |  |
 | ------- |
 | [0209-minimum-size-subarray-sum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0209-minimum-size-subarray-sum) |
+| [0278-first-bad-version](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0278-first-bad-version) |
 ## Prefix Sum
 |  |
 | ------- |
 | [0209-minimum-size-subarray-sum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0209-minimum-size-subarray-sum) |
+## Interactive
+|  |
+| ------- |
+| [0278-first-bad-version](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0278-first-bad-version) |
 <!---LeetCode Topics End-->
