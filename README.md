@@ -10,6 +10,7 @@
 |  |
 | ------- |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
+| [1781-sum-of-beauty-of-all-substrings](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1781-sum-of-beauty-of-all-substrings) |
 ## Sliding Window
 |  |
 | ------- |
@@ -28,4 +29,12 @@
 |  |
 | ------- |
 | [0278-first-bad-version](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0278-first-bad-version) |
+## String
+|  |
+| ------- |
+| [1781-sum-of-beauty-of-all-substrings](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1781-sum-of-beauty-of-all-substrings) |
+## Counting
+|  |
+| ------- |
+| [1781-sum-of-beauty-of-all-substrings](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1781-sum-of-beauty-of-all-substrings) |
 <!---LeetCode Topics End-->
