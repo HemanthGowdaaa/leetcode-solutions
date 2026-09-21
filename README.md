@@ -71,4 +71,20 @@
 |  |
 | ------- |
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
+## Tree
+|  |
+| ------- |
+| [0101-symmetric-tree](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0101-symmetric-tree) |
+## Depth-First Search
+|  |
+| ------- |
+| [0101-symmetric-tree](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0101-symmetric-tree) |
+## Breadth-First Search
+|  |
+| ------- |
+| [0101-symmetric-tree](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0101-symmetric-tree) |
+## Binary Tree
+|  |
+| ------- |
+| [0101-symmetric-tree](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0101-symmetric-tree) |
 <!---LeetCode Topics End-->
