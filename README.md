@@ -8,6 +8,7 @@
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
+| [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
 | [1046-last-stone-weight](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1046-last-stone-weight) |
 ## Hash Table
 |  |
@@ -61,6 +62,7 @@
 | ------- |
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
+| [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
 ## Linked List
 |  |
 | ------- |
@@ -115,13 +117,28 @@
 |  |
 | ------- |
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
+| [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
 ## Heap (Priority Queue)
 |  |
 | ------- |
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
+| [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
 | [1046-last-stone-weight](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1046-last-stone-weight) |
 ## Quickselect
 |  |
 | ------- |
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
+| [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
+## Math
+|  |
+| ------- |
+| [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
+## Geometry
+|  |
+| ------- |
+| [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
+## K-D Tree
+|  |
+| ------- |
+| [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
 <!---LeetCode Topics End-->
