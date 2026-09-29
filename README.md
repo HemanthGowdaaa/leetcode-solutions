@@ -61,6 +61,7 @@
 |  |
 | ------- |
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
+| [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
 | [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
 ## Linked List
@@ -72,6 +73,7 @@
 |  |
 | ------- |
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
+| [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
 | [0703-kth-largest-element-in-a-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0703-kth-largest-element-in-a-stream) |
 ## Doubly-Linked List
 |  |
@@ -125,6 +127,7 @@
 |  |
 | ------- |
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
+| [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
 | [0703-kth-largest-element-in-a-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0703-kth-largest-element-in-a-stream) |
 | [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
 | [1046-last-stone-weight](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1046-last-stone-weight) |
@@ -152,5 +155,10 @@
 ## Data Stream
 |  |
 | ------- |
+| [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
 | [0703-kth-largest-element-in-a-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0703-kth-largest-element-in-a-stream) |
+## Two Pointers
+|  |
+| ------- |
+| [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
 <!---LeetCode Topics End-->
