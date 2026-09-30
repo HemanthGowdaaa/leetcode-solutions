@@ -15,6 +15,7 @@
 | ------- |
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
+| [0355-design-twitter](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0355-design-twitter) |
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
 | [1781-sum-of-beauty-of-all-substrings](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1781-sum-of-beauty-of-all-substrings) |
 ## Sliding Window
@@ -69,11 +70,13 @@
 | ------- |
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
 | [0328-odd-even-linked-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0328-odd-even-linked-list) |
+| [0355-design-twitter](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0355-design-twitter) |
 ## Design
 |  |
 | ------- |
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
 | [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
+| [0355-design-twitter](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0355-design-twitter) |
 | [0703-kth-largest-element-in-a-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0703-kth-largest-element-in-a-stream) |
 ## Doubly-Linked List
 |  |
@@ -128,6 +131,7 @@
 | ------- |
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
 | [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
+| [0355-design-twitter](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0355-design-twitter) |
 | [0703-kth-largest-element-in-a-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0703-kth-largest-element-in-a-stream) |
 | [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
 | [1046-last-stone-weight](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1046-last-stone-weight) |
