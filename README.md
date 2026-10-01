@@ -16,6 +16,7 @@
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
 | [0355-design-twitter](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0355-design-twitter) |
+| [0567-permutation-in-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0567-permutation-in-string) |
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
 | [1781-sum-of-beauty-of-all-substrings](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1781-sum-of-beauty-of-all-substrings) |
 ## Sliding Window
@@ -23,6 +24,7 @@
 | ------- |
 | [0209-minimum-size-subarray-sum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0209-minimum-size-subarray-sum) |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
+| [0567-permutation-in-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0567-permutation-in-string) |
 ## Binary Search
 |  |
 | ------- |
@@ -40,6 +42,7 @@
 |  |
 | ------- |
 | [0402-remove-k-digits](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0402-remove-k-digits) |
+| [0567-permutation-in-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0567-permutation-in-string) |
 | [1781-sum-of-beauty-of-all-substrings](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1781-sum-of-beauty-of-all-substrings) |
 ## Counting
 |  |
@@ -165,4 +168,5 @@
 |  |
 | ------- |
 | [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
+| [0567-permutation-in-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0567-permutation-in-string) |
 <!---LeetCode Topics End-->
