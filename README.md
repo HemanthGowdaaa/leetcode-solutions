@@ -15,6 +15,7 @@
 |  |
 | ------- |
 | [0076-minimum-window-substring](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0076-minimum-window-substring) |
+| [0138-copy-list-with-random-pointer](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0138-copy-list-with-random-pointer) |
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
 | [0355-design-twitter](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0355-design-twitter) |
@@ -77,6 +78,7 @@
 ## Linked List
 |  |
 | ------- |
+| [0138-copy-list-with-random-pointer](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0138-copy-list-with-random-pointer) |
 | [0143-reorder-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0143-reorder-list) |
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
 | [0328-odd-even-linked-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0328-odd-even-linked-list) |
