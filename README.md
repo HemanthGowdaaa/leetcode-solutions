@@ -56,6 +56,7 @@
 ## Stack
 |  |
 | ------- |
+| [0143-reorder-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0143-reorder-list) |
 | [0402-remove-k-digits](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0402-remove-k-digits) |
 ## Greedy
 |  |
@@ -76,6 +77,7 @@
 ## Linked List
 |  |
 | ------- |
+| [0143-reorder-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0143-reorder-list) |
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
 | [0328-odd-even-linked-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0328-odd-even-linked-list) |
 | [0355-design-twitter](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0355-design-twitter) |
@@ -173,6 +175,7 @@
 ## Two Pointers
 |  |
 | ------- |
+| [0143-reorder-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0143-reorder-list) |
 | [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
 | [0567-permutation-in-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0567-permutation-in-string) |
 ## Queue
@@ -187,4 +190,8 @@
 |  |
 | ------- |
 | [0239-sliding-window-maximum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0239-sliding-window-maximum) |
+## Recursion
+|  |
+| ------- |
+| [0143-reorder-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0143-reorder-list) |
 <!---LeetCode Topics End-->
