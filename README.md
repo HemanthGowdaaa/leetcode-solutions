@@ -8,6 +8,7 @@
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
 | [0239-sliding-window-maximum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0239-sliding-window-maximum) |
+| [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
 | [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
 | [1046-last-stone-weight](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1046-last-stone-weight) |
@@ -35,6 +36,7 @@
 | ------- |
 | [0209-minimum-size-subarray-sum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0209-minimum-size-subarray-sum) |
 | [0278-first-bad-version](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0278-first-bad-version) |
+| [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
 ## Prefix Sum
 |  |
 | ------- |
@@ -201,4 +203,12 @@
 |  |
 | ------- |
 | [0190-reverse-bits](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0190-reverse-bits) |
+## Dynamic Programming
+|  |
+| ------- |
+| [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
+## Longest Increasing Subsequence
+|  |
+| ------- |
+| [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
 <!---LeetCode Topics End-->
