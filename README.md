@@ -4,6 +4,7 @@
 ## Array
 |  |
 | ------- |
+| [0200-number-of-islands](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0200-number-of-islands) |
 | [0209-minimum-size-subarray-sum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0209-minimum-size-subarray-sum) |
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
@@ -110,12 +111,14 @@
 | ------- |
 | [0101-symmetric-tree](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0101-symmetric-tree) |
 | [0110-balanced-binary-tree](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0110-balanced-binary-tree) |
+| [0200-number-of-islands](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0200-number-of-islands) |
 | [0543-diameter-of-binary-tree](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0543-diameter-of-binary-tree) |
 | [0572-subtree-of-another-tree](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0572-subtree-of-another-tree) |
 ## Breadth-First Search
 |  |
 | ------- |
 | [0101-symmetric-tree](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0101-symmetric-tree) |
+| [0200-number-of-islands](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0200-number-of-islands) |
 ## Binary Tree
 |  |
 | ------- |
@@ -212,4 +215,12 @@
 |  |
 | ------- |
 | [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
+## Union-Find
+|  |
+| ------- |
+| [0200-number-of-islands](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0200-number-of-islands) |
+## Matrix
+|  |
+| ------- |
+| [0200-number-of-islands](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0200-number-of-islands) |
 <!---LeetCode Topics End-->
