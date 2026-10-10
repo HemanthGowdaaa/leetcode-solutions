@@ -65,6 +65,7 @@
 | [0143-reorder-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0143-reorder-list) |
 | [0402-remove-k-digits](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0402-remove-k-digits) |
 | [0739-daily-temperatures](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0739-daily-temperatures) |
+| [0901-online-stock-span](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0901-online-stock-span) |
 ## Greedy
 |  |
 | ------- |
@@ -75,6 +76,7 @@
 | ------- |
 | [0402-remove-k-digits](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0402-remove-k-digits) |
 | [0739-daily-temperatures](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0739-daily-temperatures) |
+| [0901-online-stock-span](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0901-online-stock-span) |
 ## Sorting
 |  |
 | ------- |
@@ -97,6 +99,7 @@
 | [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
 | [0355-design-twitter](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0355-design-twitter) |
 | [0703-kth-largest-element-in-a-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0703-kth-largest-element-in-a-stream) |
+| [0901-online-stock-span](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0901-online-stock-span) |
 ## Doubly-Linked List
 |  |
 | ------- |
@@ -184,6 +187,7 @@
 | ------- |
 | [0295-find-median-from-data-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0295-find-median-from-data-stream) |
 | [0703-kth-largest-element-in-a-stream](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0703-kth-largest-element-in-a-stream) |
+| [0901-online-stock-span](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0901-online-stock-span) |
 ## Two Pointers
 |  |
 | ------- |
