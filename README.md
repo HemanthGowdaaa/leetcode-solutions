@@ -11,6 +11,7 @@
 | [0239-sliding-window-maximum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0239-sliding-window-maximum) |
 | [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
 | [0485-max-consecutive-ones](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0485-max-consecutive-ones) |
+| [0735-asteroid-collision](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0735-asteroid-collision) |
 | [0739-daily-temperatures](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0739-daily-temperatures) |
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
 | [0853-car-fleet](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0853-car-fleet) |
@@ -65,6 +66,7 @@
 | ------- |
 | [0143-reorder-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0143-reorder-list) |
 | [0402-remove-k-digits](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0402-remove-k-digits) |
+| [0735-asteroid-collision](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0735-asteroid-collision) |
 | [0739-daily-temperatures](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0739-daily-temperatures) |
 | [0853-car-fleet](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0853-car-fleet) |
 | [0901-online-stock-span](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0901-online-stock-span) |
@@ -234,4 +236,8 @@
 |  |
 | ------- |
 | [0200-number-of-islands](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0200-number-of-islands) |
+## Simulation
+|  |
+| ------- |
+| [0735-asteroid-collision](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0735-asteroid-collision) |
 <!---LeetCode Topics End-->
