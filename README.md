@@ -54,6 +54,7 @@
 |  |
 | ------- |
 | [0076-minimum-window-substring](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0076-minimum-window-substring) |
+| [0394-decode-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0394-decode-string) |
 | [0402-remove-k-digits](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0402-remove-k-digits) |
 | [0567-permutation-in-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0567-permutation-in-string) |
 | [1781-sum-of-beauty-of-all-substrings](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1781-sum-of-beauty-of-all-substrings) |
@@ -65,6 +66,7 @@
 |  |
 | ------- |
 | [0143-reorder-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0143-reorder-list) |
+| [0394-decode-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0394-decode-string) |
 | [0402-remove-k-digits](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0402-remove-k-digits) |
 | [0735-asteroid-collision](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0735-asteroid-collision) |
 | [0739-daily-temperatures](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0739-daily-temperatures) |
@@ -216,6 +218,7 @@
 |  |
 | ------- |
 | [0143-reorder-list](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0143-reorder-list) |
+| [0394-decode-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0394-decode-string) |
 ## Bit Manipulation
 |  |
 | ------- |
