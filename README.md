@@ -25,6 +25,7 @@
 | [0146-lru-cache](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0146-lru-cache) |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
 | [0355-design-twitter](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0355-design-twitter) |
+| [0438-find-all-anagrams-in-a-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0438-find-all-anagrams-in-a-string) |
 | [0567-permutation-in-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0567-permutation-in-string) |
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
 | [1781-sum-of-beauty-of-all-substrings](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1781-sum-of-beauty-of-all-substrings) |
@@ -35,6 +36,7 @@
 | [0209-minimum-size-subarray-sum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0209-minimum-size-subarray-sum) |
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
 | [0239-sliding-window-maximum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0239-sliding-window-maximum) |
+| [0438-find-all-anagrams-in-a-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0438-find-all-anagrams-in-a-string) |
 | [0567-permutation-in-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0567-permutation-in-string) |
 ## Binary Search
 |  |
@@ -56,6 +58,7 @@
 | [0076-minimum-window-substring](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0076-minimum-window-substring) |
 | [0394-decode-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0394-decode-string) |
 | [0402-remove-k-digits](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0402-remove-k-digits) |
+| [0438-find-all-anagrams-in-a-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0438-find-all-anagrams-in-a-string) |
 | [0567-permutation-in-string](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0567-permutation-in-string) |
 | [1781-sum-of-beauty-of-all-substrings](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1781-sum-of-beauty-of-all-substrings) |
 ## Counting
