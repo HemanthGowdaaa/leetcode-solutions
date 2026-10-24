@@ -11,15 +11,15 @@ class Solution:
         
 
         while q:
-            rightSide = None
+            right = None
             qlen = len(q)
             for i in range(qlen):
                 node = q.popleft()
                 if node:
-                    rightSide = node
+                    right = node
                     q.append(node.left)
                     q.append(node.right)
-            if rightSide:
-                res.append(rightSide.val)
+            if right:
+                res.append(right.val)
         return res
         
