@@ -5,6 +5,7 @@
 |  |
 | ------- |
 | [0105-construct-binary-tree-from-preorder-and-inorder-traversal](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0105-construct-binary-tree-from-preorder-and-inorder-traversal) |
+| [0119-pascals-triangle-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0119-pascals-triangle-ii) |
 | [0200-number-of-islands](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0200-number-of-islands) |
 | [0209-minimum-size-subarray-sum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0209-minimum-size-subarray-sum) |
 | [0215-kth-largest-element-in-an-array](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0215-kth-largest-element-in-an-array) |
@@ -270,6 +271,7 @@
 ## Dynamic Programming
 |  |
 | ------- |
+| [0119-pascals-triangle-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0119-pascals-triangle-ii) |
 | [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
 ## Longest Increasing Subsequence
 |  |
