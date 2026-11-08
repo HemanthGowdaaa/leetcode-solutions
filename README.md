@@ -21,6 +21,7 @@
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
 | [0853-car-fleet](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0853-car-fleet) |
 | [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
+| [0994-rotting-oranges](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0994-rotting-oranges) |
 | [1046-last-stone-weight](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1046-last-stone-weight) |
 ## Hash Table
 |  |
@@ -174,6 +175,7 @@
 | [0684-redundant-connection](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0684-redundant-connection) |
 | [0695-max-area-of-island](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0695-max-area-of-island) |
 | [0733-flood-fill](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0733-flood-fill) |
+| [0994-rotting-oranges](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0994-rotting-oranges) |
 ## Binary Tree
 |  |
 | ------- |
@@ -296,6 +298,7 @@
 | [0200-number-of-islands](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0200-number-of-islands) |
 | [0695-max-area-of-island](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0695-max-area-of-island) |
 | [0733-flood-fill](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0733-flood-fill) |
+| [0994-rotting-oranges](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0994-rotting-oranges) |
 ## Simulation
 |  |
 | ------- |
