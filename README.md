@@ -15,6 +15,7 @@
 | [0485-max-consecutive-ones](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0485-max-consecutive-ones) |
 | [0645-set-mismatch](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0645-set-mismatch) |
 | [0695-max-area-of-island](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0695-max-area-of-island) |
+| [0724-find-pivot-index](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0724-find-pivot-index) |
 | [0733-flood-fill](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0733-flood-fill) |
 | [0735-asteroid-collision](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0735-asteroid-collision) |
 | [0739-daily-temperatures](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0739-daily-temperatures) |
@@ -56,6 +57,7 @@
 |  |
 | ------- |
 | [0209-minimum-size-subarray-sum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0209-minimum-size-subarray-sum) |
+| [0724-find-pivot-index](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0724-find-pivot-index) |
 ## Interactive
 |  |
 | ------- |
