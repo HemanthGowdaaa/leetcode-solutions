@@ -324,6 +324,7 @@
 | [0547-number-of-provinces](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0547-number-of-provinces) |
 | [0684-redundant-connection](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0684-redundant-connection) |
 | [0797-all-paths-from-source-to-target](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0797-all-paths-from-source-to-target) |
+| [1791-find-center-of-star-graph](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/1791-find-center-of-star-graph) |
 ## Topological Sort
 |  |
 | ------- |
