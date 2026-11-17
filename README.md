@@ -19,6 +19,7 @@
 | [0733-flood-fill](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0733-flood-fill) |
 | [0735-asteroid-collision](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0735-asteroid-collision) |
 | [0739-daily-temperatures](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0739-daily-temperatures) |
+| [0746-min-cost-climbing-stairs](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0746-min-cost-climbing-stairs) |
 | [0846-hand-of-straights](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0846-hand-of-straights) |
 | [0853-car-fleet](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0853-car-fleet) |
 | [0973-k-closest-points-to-origin](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0973-k-closest-points-to-origin) |
@@ -285,6 +286,7 @@
 | ------- |
 | [0119-pascals-triangle-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0119-pascals-triangle-ii) |
 | [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
+| [0746-min-cost-climbing-stairs](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0746-min-cost-climbing-stairs) |
 ## Longest Increasing Subsequence
 |  |
 | ------- |
