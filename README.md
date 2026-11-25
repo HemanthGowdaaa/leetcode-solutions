@@ -12,6 +12,7 @@
 | [0219-contains-duplicate-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0219-contains-duplicate-ii) |
 | [0239-sliding-window-maximum](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0239-sliding-window-maximum) |
 | [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
+| [0322-coin-change](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0322-coin-change) |
 | [0485-max-consecutive-ones](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0485-max-consecutive-ones) |
 | [0645-set-mismatch](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0645-set-mismatch) |
 | [0695-max-area-of-island](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0695-max-area-of-island) |
@@ -176,6 +177,7 @@
 | [0200-number-of-islands](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0200-number-of-islands) |
 | [0207-course-schedule](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0207-course-schedule) |
 | [0210-course-schedule-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0210-course-schedule-ii) |
+| [0322-coin-change](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0322-coin-change) |
 | [0547-number-of-provinces](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0547-number-of-provinces) |
 | [0684-redundant-connection](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0684-redundant-connection) |
 | [0695-max-area-of-island](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0695-max-area-of-island) |
@@ -288,6 +290,7 @@
 | ------- |
 | [0119-pascals-triangle-ii](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0119-pascals-triangle-ii) |
 | [0300-longest-increasing-subsequence](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0300-longest-increasing-subsequence) |
+| [0322-coin-change](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0322-coin-change) |
 | [0746-min-cost-climbing-stairs](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0746-min-cost-climbing-stairs) |
 ## Longest Increasing Subsequence
 |  |
@@ -344,4 +347,12 @@
 |  |
 | ------- |
 | [0797-all-paths-from-source-to-target](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0797-all-paths-from-source-to-target) |
+## Knapsack Problem
+|  |
+| ------- |
+| [0322-coin-change](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0322-coin-change) |
+## Complete Knapsack
+|  |
+| ------- |
+| [0322-coin-change](https://github.com/HemanthGowdaaa/leetcode-solutions/tree/master/0322-coin-change) |
 <!---LeetCode Topics End-->
