@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coin Change II – Learn Dynamic Programming</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07091a;--card:#10132a;--line:#232846;--v:#8b5cf6;--c:#22d3ee;--g:#34d399;--a:#fbbf24;--t:#f4f5fb;--m:#9aa1c0;--r:16px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--t);font:16px/1.65 Inter,system-ui,sans-serif;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:44px 44px}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--v),var(--c));z-index:9}
+nav{position:sticky;top:0;z-index:5;display:flex;gap:4px;overflow-x:auto;padding:10px 16px;background:#07091acc;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav a{color:var(--m);text-decoration:none;font-size:13px;padding:5px 11px;border-radius:99px;white-space:nowrap}nav a:hover{color:var(--t);background:var(--card)}
+section{max-width:1000px;margin:0 auto;padding:72px 20px 24px}
+h1{font-size:clamp(40px,8vw,84px);line-height:1;margin:.2em 0;font-weight:800;letter-spacing:-.03em}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;letter-spacing:-.02em}h3{margin:22px 0 8px}
+p.lead{color:var(--m);max-width:68ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin:18px 0}
+.badge{display:inline-block;padding:4px 12px;border-radius:99px;font-size:13px;font-weight:600;margin:0 8px 6px 0;border:1px solid var(--line)}
+.b1{color:var(--a)}.b2{color:var(--v)}.b3{color:var(--c)}
+button{font:inherit;cursor:pointer;background:var(--card);color:var(--t);border:1px solid var(--line);border-radius:10px;padding:8px 16px;transition:.2s}
+button:hover:not(:disabled){border-color:var(--v);transform:translateY(-1px)}button:disabled{opacity:.4;cursor:default}
+button.p{background:var(--v);border-color:var(--v);font-weight:600}
+:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+input,select{font:inherit;background:#0a0c20;color:var(--t);border:1px solid var(--line);border-radius:10px;padding:8px 12px;width:100%}
+code,pre,.mono{font-family:'JetBrains Mono',monospace}
+code{background:#ffffff12;padding:2px 6px;border-radius:6px;font-size:.9em}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center}
+.grad{background:linear-gradient(90deg,var(--v),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.coin{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;font-weight:800;font-size:15px;color:#1a1033;background:radial-gradient(circle at 30% 30%,#fde68a,#f59e0b);box-shadow:inset 0 0 0 3px #ffffff55}
+.coin.c2{background:radial-gradient(circle at 30% 30%,#a5f3fc,#22d3ee)}.coin.c5{background:radial-gradient(circle at 30% 30%,#ddd6fe,#8b5cf6)}.coin.c10{background:radial-gradient(circle at 30% 30%,#bbf7d0,#34d399);font-size:13px}
+.combo{display:flex;flex-wrap:wrap;align-items:center;gap:5px;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:#0a0c20;margin:6px 0;animation:pop .5s both}
+.combo .eq{color:var(--g);font-weight:700;margin-left:6px}.combo .pl{color:var(--m)}
+@keyframes pop{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:44px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}.tabs button.on{background:var(--v);border-color:var(--v)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dp{display:flex;gap:6px;overflow-x:auto;padding:8px 2px}
+.cell{flex:0 0 auto;min-width:56px;text-align:center;border:1px solid var(--line);border-radius:10px;padding:6px 4px;background:#171a33;color:var(--m);transition:.3s}
+.cell small{display:block;font-size:11px;opacity:.7}.cell b{font-size:18px}
+.cell.dn{background:#1b2a55;color:#a5b4fc}.cell.cur{background:#0e4a57;border-color:var(--c);color:#fff;transform:translateY(-4px)}
+.cell.rem{background:#35246a;border-color:var(--v);color:#fff}.cell.up{background:#0f4a37;border-color:var(--g);color:#fff;transform:scale(1.08)}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.info div{background:#0a0c20;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--m)}.info b{display:block;color:var(--t);font-size:18px}
+.bar{height:6px;background:#171a33;border-radius:9px;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--v),var(--c));transition:width .3s}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.ctl select{width:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px;text-align:center;border-bottom:1px solid var(--line)}
+td.l,th.l{text-align:left}
+tr.row{cursor:pointer}tr.row:hover{background:#ffffff08}tr.sel{background:#22d3ee22}
+pre{background:#080a1c;border:1px solid var(--line);border-radius:12px;padding:14px 0;overflow-x:auto;margin:0;font-size:14px}
+.ln{display:block;padding:1px 16px;border-left:3px solid transparent;opacity:.45;white-space:pre}.ln.on{opacity:1;background:#8b5cf622;border-left-color:var(--v)}.ln.done{opacity:.85}
+.k{color:#c4b5fd}.f{color:var(--c)}.n{color:var(--a)}
+.loops{display:grid;gap:3px;margin:12px 0}.loops i{height:14px;border-radius:3px;background:#171a33;transition:background .2s}.loops i.on{background:var(--v)}.loops i.off{background:transparent}
+.opt{display:block;width:100%;text-align:left;margin:6px 0}.opt.ok{border-color:var(--g);background:#0f4a37}.opt.bad{border-color:#f87171;background:#4a1f1f}
+.err{color:#f87171}.good{color:var(--g)}.mut{color:var(--m)}.warn{color:var(--a)}
+.zero{font-size:26px;font-weight:800}.big{font-size:44px;font-weight:800}
+.rv{opacity:0;transform:translateY(14px);transition:.6s}.rv.in{opacity:1;transform:none}
+footer{text-align:center;color:var(--m);padding:60px 20px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}section{padding-top:48px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+</style></head><body>
+<div id="prog"></div>
+<nav aria-label="Sections"><a href="#s1">Start</a><a href="#s2">Problem</a><a href="#s3">Thinking</a><a href="#s4">State</a><a href="#s5">Recurrence</a><a href="#s6">Loop order</a><a href="#s7">Visualizer</a><a href="#s8">Dry run</a><a href="#s9">Code</a><a href="#s10">Playground</a><a href="#s11">Complexity</a><a href="#s12">Quiz</a><a href="#s13">I vs II</a><a href="#s14">Recap</a></nav>
+
+<section id="s1" class="hero">
+<div><span class="badge b1">Medium</span><span class="badge b2">Dynamic Programming</span><span class="badge b3">Time: O(amount × coins)</span><span class="badge b3">Space: O(amount)</span></div>
+<p class="mut" style="margin:18px 0 0">LeetCode 518</p>
+<h1>Coin <span class="grad">Change II</span></h1>
+<p class="lead" style="font-size:20px">From counting possibilities to mastering Dynamic Programming.</p>
+<div class="card" aria-live="polite"><b>Ways to make 5 with [1, 2, 5]</b><div id="heroCombos" style="min-height:230px"></div></div>
+<div><button class="p" id="startBtn">Start Learning</button></div>
+</section>
+
+<section id="s2" class="rv"><h2>Understand the problem</h2>
+<p class="lead">You get coin values and a target amount. Return how many <em>different combinations</em> of coins add up to the amount.</p>
+<div class="grid2">
+<div class="card"><b>Number of combinations</b><p class="mut">We count ways, not the fewest coins.</p></div>
+<div class="card"><b>Unlimited supply</b><p class="mut">Each coin type can be used again and again.</p></div>
+<div class="card"><b>Different denominations</b><p class="mut">Coins like 1, 2 and 5 are different types.</p></div>
+<div class="card"><b>Order does not matter</b><p class="mut">2 + 1 and 1 + 2 are the same combination.</p></div>
+<div class="card"><b>Impossible combinations</b><p class="mut">If nothing adds up exactly, the answer is 0 (not -1).</p></div></div>
+<div class="tabs" id="exTabs"></div>
+<div class="card"><div id="exInfo"></div><div id="exList"></div><p id="exWhy" class="mut"></p></div>
+<div class="card"><b>Can you understand the problem?</b><p class="mut">For coins = [3] and amount = 9, what is the output?</p><div id="chk"></div></div></section>
+
+<section id="s3" class="rv"><h2>How should you think?</h2>
+<p class="lead">“If I need to make amount 5 using coins [1, 2, 5], how many different combinations are possible?”</p>
+<div class="grid2"><div class="card"><b class="warn">Coin Change I (LeetCode 322)</b><p>Find the <b>minimum number of coins</b>.</p><p class="mut">For 5: answer 1 (just the 5). We compare options with <code>min</code>.</p></div>
+<div class="card"><b class="good">Coin Change II (LeetCode 518)</b><p>Find the <b>number of unique combinations</b>.</p><p class="mut">For 5: answer 4. We combine options with <code>+</code>.</p></div></div>
+<div class="card"><p><b>Same combination, different order.</b> <code>[2, 1, 2]</code> and <code>[1, 2, 2]</code> use one 1 and two 2s. They are one combination.</p>
+<div class="combo">[2, 1, 2]: <span class="coin c2">2</span><span class="coin">1</span><span class="coin c2">2</span><span class="eq">= {1, 2, 2}</span></div>
+<div class="combo">[1, 2, 2]: <span class="coin">1</span><span class="coin c2">2</span><span class="coin c2">2</span><span class="eq">= {1, 2, 2}</span></div>
+<p>We need to count combinations without counting different arrangements of the same coins as separate answers. If we try every arrangement, one combination shows up many times.</p></div>
+<div class="card"><p><b>Optimal substructure:</b> ways to make 5 come from ways to make smaller amounts like 3 (add a 2) or 0 (add a 5).</p><p><b>Overlapping subproblems:</b> the same smaller amounts are needed again and again.</p><p><b>Reuse:</b> store each count once in an array. Here we <em>count ways</em> instead of minimizing cost.</p></div></section>
+
+<section id="s4" class="rv"><h2>Understand the DP state</h2>
+<p class="lead">“How many ways can I make amount <code>a</code> using the coins processed so far?” Store it as <code>dp[a]</code>.</p>
+<div class="card"><div class="dp" id="initDp"></div>
+<p><b class="good">dp[0] = 1</b>: there is exactly one way to make 0. Choose no coins. That single empty way is what every bigger count is built from. If dp[0] were 0, every count would stay 0 forever.</p>
+<p>Other cells start at 0: so far no combinations are known for positive amounts.</p></div>
+<div class="grid2"><div class="card"><b class="warn">Coin Change I</b><div class="zero warn mono">dp[0] = 0</div><p class="mut">0 coins are needed. The other cells start at infinity.</p></div>
+<div class="card"><b class="good">Coin Change II</b><div class="zero good mono">dp[0] = 1</div><p class="mut">1 way to make 0. The other cells start at 0.</p></div></div></section>
+
+<section id="s5" class="rv"><h2>Derive the recurrence</h2>
+<div class="card"><p class="mono grad" style="font-size:20px">dp[a] += dp[a - coin]</p><p class="mut">Only when <code>a &gt;= coin</code>.</p>
+<ol style="padding-left:20px"><li>Select a coin.</li><li>Consider the current target amount a.</li><li>Remove the coin from the target: a - coin.</li><li>Look at how many combinations make the remaining amount.</li><li>Add those combinations to dp[a].</li></ol>
+<p><b>Why add?</b> Every way to make a - coin becomes a new way to make a by putting one more coin on it. Different sources give different combinations, so their counts add. <code>min</code> would throw ways away.</p></div>
+<div class="grid2"><div class="card"><b>Coin 1</b><p class="mono">dp[a] += dp[a - 1]</p><p class="mut">Every way to make a-1, plus a 1.</p></div><div class="card"><b>Coin 2</b><p class="mono">dp[a] += dp[a - 2]</p><p class="mut">Every way to make a-2, plus a 2.</p></div><div class="card"><b>Coin 5</b><p class="mono">dp[a] += dp[a - 5]</p><p class="mut">Only for a ≥ 5. dp[5] += dp[0].</p></div></div></section>
+
+<section id="s6" class="rv"><h2>Why loop order matters</h2>
+<div class="grid2"><div><b class="good">Correct: coins outside</b><pre><span class="ln">for coin in coins:</span><span class="ln">    for a in range(coin, amount + 1):</span><span class="ln">        dp[a] += dp[a - coin]</span></pre></div>
+<div><b class="err">Incorrect: amounts outside</b><pre><span class="ln">for a in range(1, amount + 1):</span><span class="ln">    for coin in coins:</span><span class="ln">        dp[a] += dp[a - coin]</span></pre></div></div>
+<p class="lead">With coins outside, we finish all uses of coin 1 before coin 2 appears. Coins are always added in the same order, so 1 + 2 can exist but 2 + 1 cannot. With amounts outside, any coin can be the last one at every amount, so each ordering is counted.</p>
+<div class="card"><b>coins = [1, 2], amount = 3</b> <button class="p" id="loAnim" style="margin-left:10px">Animate both</button>
+<div class="grid2" style="margin-top:12px"><div><b class="good">Combinations (correct)</b><div class="dp" id="loL"></div><p class="mono mut" id="loLt"></p><div id="loLw"></div></div>
+<div><b class="err">Permutations (wrong)</b><div class="dp" id="loR"></div><p class="mono mut" id="loRt"></p><div id="loRw"></div></div></div></div>
+<h3>Why the amount loop goes forward</h3>
+<p class="lead">Going forward, dp[a - coin] was already updated with this same coin, so the coin can be reused. Going backward, dp[a - coin] hasn't seen this coin yet, so each coin is used at most once.</p>
+<div class="card"><div class="ctl"><label>Direction <select id="dirSel"><option value="f">Ascending (correct)</option><option value="b">Descending (wrong)</option></select></label><span class="mut">coins = [1, 2], amount = 3</span></div><div class="dp" id="dirDp"></div><p id="dirTxt"></p></div></section>
+
+<section id="s7" class="rv"><h2>Interactive DP visualizer</h2>
+<p class="lead">coins = [1, 2, 5], amount = 5. Each step is a real update from running the algorithm.</p>
+<div class="card"><p class="mono" id="vzPhase"></p><div class="dp" id="vzDp"></div><div class="info" id="vzInfo"></div><p id="vzExp"></p>
+<div class="bar"><i id="vzBar"></i></div><p class="mut mono" id="vzCount"></p>
+<div class="ctl"><button class="p" id="vzPlay">Play</button><button id="vzPause">Pause</button><button id="vzPrev">Previous step</button><button id="vzNext">Next step</button><button id="vzReset">Reset</button>
+<label class="mut">Speed <select id="vzSpeed" aria-label="Playback speed"><option value="2">0.5x</option><option value="1" selected>1x</option><option value=".5">2x</option></select></label></div>
+<p class="mut" style="font-size:13px">Cyan: current amount. Violet: remaining amount. Green: just updated. Muted blue: done this phase. Grey: not visited.</p></div></section>
+
+<section id="s8" class="rv"><h2>Step-by-step dry run</h2>
+<p class="lead">Previous value = the count already in dp[amount]. Added value = dp[amount - coin]. Click a row for the math.</p>
+<div class="card" style="overflow-x:auto"><table id="dry"></table>
+<div class="ctl" style="margin-top:12px"><button id="drPrev">Previous row</button><button id="drNext" class="p">Next row</button><button id="drFin">Show the four combinations</button></div>
+<p id="drCalc" class="mono" style="white-space:pre-line"></p><div id="drCombos"></div></div></section>
+
+<section id="s9" class="rv"><h2>Python code explanation</h2>
+<div class="card"><pre id="code"></pre><p id="cExp" style="margin-top:14px"></p><div class="ctl"><button id="cPrev">Back</button><button id="cNext" class="p">Reveal next line</button><button id="cReset">Reset</button></div></div></section>
+
+<section id="s10" class="rv"><h2>Interactive playground</h2>
+<div class="card"><div class="grid2"><label>Coins (comma separated)<input id="pgCoins" value="1, 2, 5"></label><label>Amount<input id="pgAmt" value="5" inputmode="numeric"></label></div>
+<div class="ctl" style="margin-top:12px"><button class="p" id="pgRun">Run algorithm</button><button id="pgReset">Reset</button></div>
+<div id="pgOut" style="margin-top:14px"></div></div></section>
+
+<section id="s11" class="rv"><h2>Complexity analysis</h2>
+<div class="grid2"><div class="card"><b>Time: O(amount × coins)</b><p class="mut">The outer loop runs once per coin. The inner loop covers amounts from coin to amount. Each update is constant work.</p></div>
+<div class="card"><b>Space: O(amount)</b><p class="mut">One array with <code>amount + 1</code> entries. This is the one-dimensional optimized solution.</p></div></div>
+<div class="card"><div class="grid2"><label>Amount <input id="cxA" type="number" value="12" min="1" max="30"></label><label>Coins (values, comma separated)<input id="cxC" value="1, 2, 5"></label></div>
+<button class="p" id="cxGo" style="margin-top:10px">Animate loops</button><div id="cxGrid"></div><p id="cxTxt" class="mut"></p></div></section>
+
+<section id="s12" class="rv"><h2>Test your understanding</h2><div class="card"><div id="qz"></div></div></section>
+
+<section id="s13" class="rv"><h2>Coin Change I vs Coin Change II</h2>
+<div class="card" style="overflow-x:auto"><table><tr><th class="l">Feature</th><th>Coin Change I</th><th>Coin Change II</th></tr>
+<tr><td class="l">What to find</td><td>Minimum coins</td><td>Number of combinations</td></tr>
+<tr><td class="l">DP initialization</td><td><code>dp[0] = 0</code></td><td><code>dp[0] = 1</code></td></tr>
+<tr><td class="l">Transition</td><td><code>min()</code></td><td><code>+=</code></td></tr>
+<tr><td class="l">Outer loop</td><td>Amount</td><td>Coins</td></tr>
+<tr><td class="l">Inner loop</td><td>Coins</td><td>Amount ascending</td></tr>
+<tr><td class="l">Result</td><td>Minimum count</td><td>Number of ways</td></tr></table></div>
+<div class="card"><b>Same input, different question</b><div class="ctl" style="margin:8px 0"><label>Coins <input id="cmpC" value="1, 2, 5" style="width:150px"></label><label>Amount <input id="cmpA" value="5" style="width:90px"></label><button class="p" id="cmpGo">Compare</button></div><div id="cmpOut"></div>
+<p class="mut">Coin Change I picks the cheapest option (min), so it can't be reused to count. Coin Change II adds every option (+=), and fixes the coin order to avoid duplicates. Different state, different transition.</p></div></section>
+
+<section id="s14" class="rv"><h2>Final recap</h2>
+<div class="grid2"><div class="card"><b>Problem</b><p class="mut">Count combinations that make the amount.</p></div><div class="card"><b>State</b><p class="mut"><code>dp[a]</code> = ways to make a with coins so far.</p></div><div class="card"><b>Initialization</b><p class="mut"><code>dp[0] = 1</code>, others 0.</p></div><div class="card"><b>Transition</b><p class="mono">dp[a] += dp[a - coin]</p></div><div class="card"><b>Loop order</b><p class="mut">Coins outside; amounts from coin to amount, ascending.</p></div><div class="card"><b>Answer</b><p class="mut"><code>dp[amount]</code></p></div></div>
+<div class="card"><pre id="recap"></pre><p>Time: O(amount × coins.length). Space: O(amount).</p></div>
+<footer><p style="font-size:20px;max-width:60ch;margin:auto">Dynamic Programming becomes easier when you stop memorizing code and start understanding what each state represents.</p></footer></section>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const timers=new Set();const later=(f,ms)=>{const t=setTimeout(()=>{timers.delete(t);f()},ms);timers.add(t);return t};
+const clearT=()=>{timers.forEach(clearTimeout);timers.clear()};
+const coinEl=v=>`<span class="coin c${[1,2,5,10].includes(v)?v:1}">${v}</span>`;
+const comboEl=(arr,delay=0)=>`<div class="combo" style="animation-delay:${delay}ms">${arr.map(coinEl).join('<span class="pl">+</span>')}<span class="eq">= ${arr.reduce((x,y)=>x+y,0)}</span></div>`;
+/* core: Coin Change II with real trace */
+function solve(coins,amount){const dp=Array(amount+1).fill(0);dp[0]=1;const steps=[];
+for(const coin of coins)for(let a=coin;a<=amount;a++){const prev=dp[a],add=dp[a-coin];dp[a]=prev+add;steps.push({coin,a,rem:a-coin,prev,add,newVal:dp[a],dp:dp.slice()})}
+return{dp,steps,ans:dp[amount]}}
+function wrongOrder(coins,amount){const dp=Array(amount+1).fill(0);dp[0]=1;const steps=[];
+for(let a=1;a<=amount;a++)for(const c of coins)if(a>=c){const prev=dp[a];dp[a]+=dp[a-c];steps.push({coin:c,a,rem:a-c,prev,add:dp[a-c],newVal:dp[a],dp:dp.slice()})}
+return{dp,steps,ans:dp[amount]}}
+function backward(coins,amount){const dp=Array(amount+1).fill(0);dp[0]=1;for(const c of coins)for(let a=amount;a>=c;a--)dp[a]+=dp[a-c];return dp}
+function coinChangeI(coins,amount){const INF=amount+1,dp=Array(amount+1).fill(INF);dp[0]=0;for(let a=1;a<=amount;a++)for(const c of coins)if(a>=c)dp[a]=Math.min(dp[a],1+dp[a-c]);return dp[amount]>=INF?-1:dp[amount]}
+function enumerate(coins,amount,cap){const out=[];let n=0;const cur=[];
+(function go(i,left){if(n>=cap)return;if(left===0){n++;if(out.length<60)out.push(cur.slice());return}
+for(let j=i;j<coins.length;j++){if(coins[j]>left)break;cur.push(coins[j]);go(j,left-coins[j]);cur.pop()}})(0,amount);return{list:out,count:n,capped:n>=cap}}
+/* nav + scroll */
+$('#startBtn').onclick=()=>$('#s2').scrollIntoView({behavior:'smooth'});
+const pr=$('#prog');addEventListener('scroll',()=>{const h=document.documentElement;pr.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.05});$$('.rv').forEach(e=>io.observe(e));
+const dpCells=(arr,cls={})=>arr.map((v,i)=>`<div class="cell ${cls[i]||''}"><small>${i}</small><b>${v}</b></div>`).join('');
+/* hero */
+{const C=[[5],[2,2,1],[2,1,1,1],[1,1,1,1,1]];C.forEach((c,i)=>later(()=>$('#heroCombos').insertAdjacentHTML('beforeend',comboEl(c)),500+i*900))}
+/* examples */
+const EX=[{c:[1,2,5],a:5,r:4,ways:[[5],[2,2,1],[2,1,1,1],[1,1,1,1,1]],w:'Four different multisets of coins reach 5. Each is counted once.'},
+{c:[2],a:3,r:0,ways:[],w:'Using 2s gives 2, 4, 6… and skips 3. No combination works, so the answer is 0 ways.'},
+{c:[10],a:10,r:1,ways:[[10]],w:'Exactly one way: use one 10. Using zero or two 10s misses the target.'}];
+EX.forEach((e,i)=>{const b=document.createElement('button');b.textContent='Example '+(i+1);b.onclick=()=>showEx(i);$('#exTabs').appendChild(b)});
+function showEx(i){const e=EX[i];$$('#exTabs button').forEach((b,j)=>b.classList.toggle('on',i===j));
+$('#exInfo').innerHTML=`<p class="mono">coins = [${e.c}], amount = ${e.a} → <b class="good">${solve(e.c,e.a).ans}</b></p>`;
+$('#exList').innerHTML=e.ways.length?e.ways.map((w,k)=>comboEl(w,k*150)).join(''):'<div class="combo"><span class="coin c2">2</span><span class="pl">+</span><span class="coin c2">2</span><span class="eq err">= 4, overshoots 3</span></div>';$('#exWhy').textContent=e.w}
+showEx(0);
+$('#chk').innerHTML=[['0',0],['1',1],['3',0],['9',0]].map(([t,k])=>`<button class="opt" data-k="${k}">${t}</button>`).join('')+'<p id="chkF"></p>';
+$$('#chk .opt').forEach(b=>b.onclick=()=>{const ok=b.dataset.k==='1';b.classList.add(ok?'ok':'bad');$('#chkF').innerHTML=ok?'<span class="good">Correct: 3 + 3 + 3 is the only combination.</span>':'<span class="err">Not quite. How many different combinations of 3s make 9?</span>'});
+$('#initDp').innerHTML=dpCells([1,0,0,0,0,0],{0:'up'});
+/* loop order */
+$('#loAnim').onclick=()=>{clearT();const A=solve([1,2],3).steps,B=wrongOrder([1,2],3).steps;
+$('#loLw').innerHTML=$('#loRw').innerHTML='';$('#loLt').textContent=$('#loRt').textContent='';
+const n=Math.max(A.length,B.length);
+const draw=(id,tid,s,done)=>{$(id).innerHTML=dpCells(s.dp,{[s.a]:'up',[s.rem]:'rem'});$(tid).textContent=`coin ${s.coin}: dp[${s.a}] = ${s.prev} + dp[${s.rem}] = ${s.newVal}`};
+for(let i=0;i<n;i++)later(()=>{if(A[i])draw('#loL','#loLt',A[i]);if(B[i])draw('#loR','#loRt',B[i])},i*900);
+later(()=>{$('#loLw').innerHTML=comboEl([1,1,1])+comboEl([1,2])+'<p class="good">2 combinations</p>';
+$('#loRw').innerHTML=comboEl([1,1,1])+comboEl([1,2])+comboEl([2,1]).replace('combo"','combo" style="border-color:#f87171"')+'<p class="err">3 ways: 2 + 1 repeats 1 + 2</p>'},n*900)};
+$('#loL').innerHTML=dpCells([1,0,0,0]);$('#loR').innerHTML=dpCells([1,0,0,0]);
+function dirShow(){const f=$('#dirSel').value==='f',dp=f?solve([1,2],3).dp:backward([1,2],3);$('#dirDp').innerHTML=dpCells(dp,{3:'up'});
+$('#dirTxt').innerHTML=f?`Ascending: dp[3] = <b class="good">${dp[3]}</b>. The coin 1 is reused: 1+1+1 is found because dp[2] already includes a 1.`:`Descending: dp[3] = <b class="err">${dp[3]}</b>. dp[a-1] hasn't been updated with coin 1 yet, so 1+1+1 is lost. Each coin acts as if you had only one.`}
+$('#dirSel').onchange=dirShow;dirShow();
+/* visualizer */
+const V={i:-1,timer:null,res:solve([1,2,5],5)};
+function vzRender(){const S=V.res.steps,n=S.length,s=V.i>=0?S[V.i]:null,fin=V.i===n-1;
+const dp=s?s.dp:[1,0,0,0,0,0],cls={};
+if(s){for(let k=s.coin;k<s.a;k++)cls[k]='dn';cls[s.rem]='rem';cls[s.a]='cur';if(s.newVal!==s.prev||true)cls[s.a]='up';if(fin)cls[5]='up'}
+$('#vzDp').innerHTML=dpCells(dp,cls);
+$('#vzPhase').textContent=s?`Phase: coin = ${s.coin}, amounts ${s.coin}..5`:'Ready: dp = [1, 0, 0, 0, 0, 0]';
+$('#vzInfo').innerHTML=s?[['Current coin',s.coin],['Current amount',s.a],['Previous dp[a]',s.prev],['Remaining a - coin',s.rem],['Ways for remaining',s.add],['Updated dp[a]',s.newVal]].map(([k,v])=>`<div>${k}<b>${v}</b></div>`).join(''):'<div>Press Play or Next step<b>—</b></div>';
+$('#vzExp').innerHTML=s?`Using coin ${s.coin}, every way to make ${s.rem} (${s.add}) becomes a way to make ${s.a}. So dp[${s.a}] = ${s.prev} + ${s.add} = <b class="good">${s.newVal}</b>.`+(fin?` <b class="good">Final answer: dp[5] = ${V.res.ans}.</b>`:''):'';
+$('#vzBar').style.width=((V.i+1)/n*100)+'%';$('#vzCount').textContent=`Step ${V.i+1} / ${n}`;
+$('#vzPrev').disabled=V.i<0;$('#vzNext').disabled=fin}
+const vzStop=()=>{clearTimeout(V.timer);V.timer=null};
+function vzTick(){if(V.i>=V.res.steps.length-1){vzStop();return}V.i++;vzRender();V.timer=setTimeout(vzTick,900*parseFloat($('#vzSpeed').value))}
+$('#vzPlay').onclick=()=>{if(V.timer)return;if(V.i>=V.res.steps.length-1)V.i=-1;vzTick()};
+$('#vzPause').onclick=vzStop;
+$('#vzNext').onclick=()=>{vzStop();if(V.i<V.res.steps.length-1){V.i++;vzRender()}};
+$('#vzPrev').onclick=()=>{vzStop();if(V.i>=0){V.i--;vzRender()}};
+$('#vzReset').onclick=()=>{vzStop();V.i=-1;vzRender()};vzRender();
+/* dry run */
+const D={i:-1},dr=solve([1,2,5],5);
+$('#dry').innerHTML='<tr><th>Processing coin</th><th>Amount</th><th>Previous value</th><th>Added value</th><th>New DP value</th></tr>'+dr.steps.map((s,i)=>`<tr class="row" data-i="${i}"><td>${s.coin}</td><td>${s.a}</td><td>${s.prev}</td><td>${s.add}</td><td><b>${s.newVal}</b></td></tr>`).join('');
+function drShow(i){D.i=i;$$('#dry tr.row').forEach(r=>r.classList.toggle('sel',+r.dataset.i===i));$('#drCombos').innerHTML='';
+const s=dr.steps[i];$('#drCalc').textContent=s?`Coin = ${s.coin}, Amount = ${s.a}:\ndp[${s.a}] = dp[${s.a}] + dp[${s.a}-${s.coin}]\ndp[${s.a}] = ${s.prev} + dp[${s.rem}]\ndp[${s.a}] = ${s.prev} + ${s.add}\ndp[${s.a}] = ${s.newVal}`:'';
+$('#drPrev').disabled=i<=0;$('#drNext').disabled=i>=dr.steps.length-1}
+$$('#dry tr.row').forEach(r=>r.onclick=()=>drShow(+r.dataset.i));
+$('#drNext').onclick=()=>drShow(D.i+1);$('#drPrev').onclick=()=>drShow(D.i-1);
+$('#drFin').onclick=()=>{clearT();drShow(dr.steps.length-1);const list=enumerate([1,2,5],5,100).list.reverse();$('#drCombos').innerHTML='';
+list.forEach((c,i)=>later(()=>{$('#drCombos').insertAdjacentHTML('beforeend',comboEl(c))},(i+1)*600));
+later(()=>$('#drCombos').insertAdjacentHTML('beforeend','<p class="mut">Each combination is built with coins in a fixed order (1s, then 2s, then 5s), so it appears exactly once. 4 ways = dp[5].</p>'),5*600)};
+drShow(-1);$('#drPrev').disabled=true;
+/* code */
+const CODE=[['class Solution:','Wraps the solution the way LeetCode expects.','The judge calls a method on this class.'],
+['    def change(self, amount: int, coins: list[int]) -> int:','Takes the amount and the coins, returns the number of combinations.','This is the entry point LeetCode calls.'],
+['        dp = [0] * (amount + 1)','Creates amount + 1 cells, all 0.','We need one cell for every amount from 0 to amount, which is amount + 1 cells. Zeros mean no ways found yet.'],
+['        dp[0] = 1','One way to make amount 0: choose no coins.','Every combination grows from this empty combination. With 0 here, everything stays 0.'],
+['','',''],
+['        for coin in coins:','Process one coin type at a time.','Coins are the OUTER loop, so combinations are built in a fixed coin order. 1 + 2 is counted but 2 + 1 is not. This is what avoids counting permutations.'],
+['            for a in range(coin, amount + 1):','Visit amounts from coin up to amount, going up.','It starts at coin because smaller amounts can\'t hold this coin (a - coin would be negative). Going UP lets dp[a - coin] already include this coin, so the coin can be reused without limit.'],
+['                dp[a] += dp[a - coin]','Add the ways to make a - coin to the ways to make a.','We use += because we are counting: each way to make a - coin plus this coin is a new way to make a. min() would only keep the cheapest and discard the count.'],
+['','',''],
+['        return dp[amount]','Return the number of combinations for the full amount.','After all coins are processed, dp[amount] counts every combination using any of the coins. If it can\'t be made, it is still 0, which is the correct answer.']];
+const hl=s=>s.replace(/\b(class|def|for|in|return)\b/g,'§k$1§e').replace(/\b(range)\b/g,'§f$1§e').replace(/\b(\d+)\b/g,'§n$1§e').replace(/§k/g,'<span class="k">').replace(/§f/g,'<span class="f">').replace(/§n/g,'<span class="n">').replace(/§e/g,'</span>');
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+$('#code').innerHTML=CODE.map((l,i)=>`<span class="ln">${hl(esc(l[0]))||' '}</span>`).join('');
+$('#recap').innerHTML=CODE.map(l=>`<span class="ln done">${hl(esc(l[0]))||' '}</span>`).join('');
+let ci=-1;const lines=CODE.map((l,i)=>i).filter(i=>CODE[i][0]);
+function cShow(){const li=lines[ci];$$('#code .ln').forEach((e,i)=>{const p=lines.indexOf(i);e.classList.toggle('on',i===li);e.classList.toggle('done',ci>=0&&p>=0&&p<ci)});
+$('#cExp').innerHTML=ci<0?'<span class="mut">Press “Reveal next line”.</span>':`<b>What:</b> ${CODE[li][1]}<br><b>Why:</b> ${CODE[li][2]}`;
+$('#cPrev').disabled=ci<0;$('#cNext').disabled=ci>=lines.length-1}
+$('#cNext').onclick=()=>{ci++;cShow()};$('#cPrev').onclick=()=>{ci--;cShow()};$('#cReset').onclick=()=>{ci=-1;cShow()};cShow();
+/* playground */
+function pgRun(){const out=$('#pgOut'),raw=$('#pgCoins').value.trim(),aRaw=$('#pgAmt').value.trim();const bad=m=>out.innerHTML=`<p class="err"><b>Input error:</b> ${m}</p>`;
+if(!raw)return bad('enter at least one coin denomination.');
+const nums=raw.split(/[\s,]+/).filter(Boolean).map(Number);
+if(nums.some(n=>!Number.isInteger(n)))return bad('coins must be whole numbers like 1, 2, 5.');
+if(nums.some(n=>n===0))return bad('a coin of 0 is not allowed (it would give infinitely many combinations).');
+if(nums.some(n=>n<0))return bad('coins must be positive.');
+if(aRaw===''||!Number.isInteger(Number(aRaw)))return bad('amount must be a whole number.');
+const amt=Number(aRaw);if(amt<0)return bad('amount cannot be negative.');if(amt>5000)return bad('amount is too large for this page. Use 5000 or less.');
+const coins=[...new Set(nums)].sort((x,y)=>x-y),dup=coins.length<nums.length;
+const dp=Array(amt+1).fill(0n);dp[0]=1n;for(const c of coins)for(let a=c;a<=amt;a++)dp[a]+=dp[a-c];
+let h=dup?`<p class="mut">Duplicates removed. Using [${coins}].</p>`:'';
+h+=`<p>Combinations: <b class="${dp[amt]===0n?'warn':'good'}" style="font-size:24px">${dp[amt]}</b> <span class="mut">${dp[amt]===0n?'(valid input: no combination exists)':''}</span></p>`;
+const shown=dp.slice(0,41).map(String);h+=`<div class="dp">${dpCells(shown,{[amt]:'up'})}</div>`+(amt>40?'<p class="mut">Showing the first 41 cells.</p>':'');
+h+=`<p class="mut">Calculated by processing each coin in turn, adding dp[a - coin] to dp[a] for a from coin to ${amt}, starting with dp[0] = 1.`+(amt===0?' Amount 0 has one way: choose no coins.':'')+'</p>';
+if(amt>0&&amt<=30){const e=enumerate(coins,amt,500);if(e.capped)h+='<p class="mut">Too many combinations to list.</p>';else{
+h+=`<p class="mut">Backtracking check found ${e.count} combination${e.count===1?'':'s'}: <b class="${BigInt(e.count)===dp[amt]?'good':'err'}">${BigInt(e.count)===dp[amt]?'matches DP':'mismatch'}</b>${e.count>60?' (first 60 shown)':''}.</p>`+(e.list.length?e.list.map(c=>comboEl(c.slice().reverse())).join(''):'<p class="mut">No combinations to show.</p>')}}
+else if(amt>30)h+='<p class="mut">Combinations are listed only for amounts up to 30.</p>';
+out.innerHTML=h}
+$('#pgRun').onclick=pgRun;$('#pgReset').onclick=()=>{$('#pgCoins').value='1, 2, 5';$('#pgAmt').value='5';pgRun()};pgRun();
+/* complexity */
+$('#cxGo').onclick=()=>{clearT();const A=Math.max(1,Math.min(30,+$('#cxA').value||1)),cs=$('#cxC').value.split(/[\s,]+/).map(Number).filter(n=>Number.isInteger(n)&&n>0).slice(0,6);const g=$('#cxGrid');
+if(!cs.length){g.innerHTML='';$('#cxTxt').innerHTML='<span class="err">Enter positive whole-number coins.</span>';return}
+g.innerHTML='';const cells=[];cs.forEach(c=>{const row=document.createElement('div');row.className='loops';row.style.gridTemplateColumns=`repeat(${A+1},1fr)`;row.title='coin '+c;
+for(let a=0;a<=A;a++){const i=document.createElement('i');if(a<c)i.className='off';else cells.push(i);row.appendChild(i)}g.appendChild(row)});
+let k=0;const go=()=>{if(k>=cells.length){$('#cxTxt').textContent=`${cells.length} updates (each coin only covers amounts from its value to ${A}). That's at most ${A} × ${cs.length} = ${A*cs.length}.`;return}cells[k].classList.add('on');k++;$('#cxTxt').textContent=`Update ${k} of ${cells.length}`;later(go,Math.max(15,600/A))};go()};
+/* quiz */
+const Q=[['Why is dp[0] initialized to 1?',['There is one way to make 0: choose no coins','Because the first coin is 1','To avoid division by zero','It marks infinity'],0,'That one empty combination is the seed for all larger counts.'],
+['What does dp[a] represent?',['Minimum coins to make a','Number of combinations that make amount a with the coins processed so far','The largest coin below a','Number of coins in the last combination'],1,'It is a count of ways, not a minimum.'],
+['Why must the coin loop be outside the amount loop?',['It is faster','It fixes the order coins are added, so 1+2 and 2+1 are not counted twice','Python requires it','It lets amounts go negative'],1,'Amount-first counts permutations; coin-first counts combinations.'],
+['Why does the amount loop move forward?',['To save memory','Because arrays are read left to right','So dp[a - coin] already includes this coin and it can be reused','To skip impossible amounts'],2,'Going backward would limit each coin to at most one use.'],
+['What is the time complexity?',['O(amount)','O(amount × coins)','O(coins)','O(2^amount)'],1,'Each coin sweeps up to amount cells with constant work per cell.']];
+const qz={i:0,s:0,done:false};
+function qRender(){const box=$('#qz');if(qz.i>=Q.length){box.innerHTML=`<h3>Score: ${qz.s} / ${Q.length}</h3><p class="mut">${qz.s===5?'Perfect. You understand the counting idea.':qz.s>=3?'Good work. Review the explanations you missed.':'Revisit the loop-order section and the visualizer, then try again.'}</p><button class="p" id="qRe">Retry</button>`;$('#qRe').onclick=()=>{qz.i=qz.s=0;qRender()};return}
+const q=Q[qz.i];qz.done=false;box.innerHTML=`<p class="mut">Question ${qz.i+1} of ${Q.length} · Score ${qz.s}</p><b>${q[0]}</b>`+q[1].map((t,k)=>`<button class="opt" data-k="${k}">${t}</button>`).join('')+'<p id="qf"></p><button id="qN" class="p" hidden>Next</button>';
+$$('#qz .opt').forEach(b=>b.onclick=()=>{if(qz.done)return;qz.done=true;const k=+b.dataset.k,ok=k===q[2];if(ok)qz.s++;b.classList.add(ok?'ok':'bad');if(!ok)$$('#qz .opt')[q[2]].classList.add('ok');
+$('#qf').innerHTML=`<span class="${ok?'good':'err'}">${ok?'Correct.':'Not quite.'}</span> ${q[3]}`;const n=$('#qN');n.hidden=false;n.textContent=qz.i===Q.length-1?'See results':'Next';n.onclick=()=>{qz.i++;qRender()}})}
+qRender();
+/* compare */
+function cmp(){const cs=[...new Set($('#cmpC').value.split(/[\s,]+/).filter(Boolean).map(Number))].sort((a,b)=>a-b),a=Number($('#cmpA').value);const o=$('#cmpOut');
+if(!cs.length||cs.some(n=>!Number.isInteger(n)||n<=0)||!Number.isInteger(a)||a<0||a>1000){o.innerHTML='<p class="err">Use positive whole-number coins and an amount from 0 to 1000.</p>';return}
+const ways=solve(cs,a).ans;o.innerHTML=`<div class="grid2"><div class="card"><b class="warn">Coin Change I</b><p>Minimum coins: <span class="big warn">${coinChangeI(cs,a)}</span></p></div><div class="card"><b class="good">Coin Change II</b><p>Combinations: <span class="big good">${ways}</span></p></div></div>`}
+$('#cmpGo').onclick=cmp;cmp();
+})();
+</script></body></html>
