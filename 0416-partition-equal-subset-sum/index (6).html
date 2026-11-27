@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Partition Equal Subset Sum – Learn 0/1 Knapsack DP</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080b14;--card:#111827;--line:#243049;--v:#8b5cf6;--c:#22d3ee;--g:#34d399;--r:#fb7185;--a:#fbbf24;--t:#fff;--m:#94a3b8;--R:16px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--t);font:16px/1.65 Inter,system-ui,sans-serif;position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(600px 400px at 15% 10%,#8b5cf633,transparent),radial-gradient(500px 400px at 85% 30%,#22d3ee22,transparent),linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:auto,auto,44px 44px,44px 44px;animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{to{background-position:60px 40px,-60px 30px,0 0,0 0}}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--v),var(--c));z-index:9}
+nav{position:sticky;top:0;z-index:5;display:flex;gap:4px;overflow-x:auto;padding:10px 16px;background:#080b14cc;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav a{color:var(--m);text-decoration:none;font-size:13px;padding:5px 11px;border-radius:99px;white-space:nowrap}nav a:hover{color:var(--t);background:var(--card)}
+section{max-width:1040px;margin:0 auto;padding:72px 20px 24px}
+h1{font-size:clamp(34px,7vw,72px);line-height:1.02;margin:.2em 0;font-weight:800;letter-spacing:-.03em}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;letter-spacing:-.02em}h3{margin:22px 0 8px}
+p.lead{color:var(--m);max-width:70ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--R);padding:22px;margin:18px 0}
+.glass{background:#111827aa;backdrop-filter:blur(8px)}
+.badge{display:inline-block;padding:4px 12px;border-radius:99px;font-size:13px;font-weight:600;margin:0 8px 6px 0;border:1px solid var(--line)}
+button{font:inherit;cursor:pointer;background:var(--card);color:var(--t);border:1px solid var(--line);border-radius:10px;padding:8px 14px;transition:.2s}
+button:hover:not(:disabled){border-color:var(--v);transform:translateY(-1px)}button:disabled{opacity:.4;cursor:default}
+button.p{background:var(--v);border-color:var(--v);font-weight:600}button.on{background:var(--v);border-color:var(--v)}
+:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+input,select{font:inherit;background:#0a0e1c;color:var(--t);border:1px solid var(--line);border-radius:10px;padding:8px 12px;width:100%}input[type=range]{padding:0}
+code,pre,.mono{font-family:'JetBrains Mono',monospace}code{background:#ffffff12;padding:2px 6px;border-radius:6px;font-size:.9em}
+.grad{background:linear-gradient(90deg,var(--v),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.ctl select,.ctl input{width:auto}
+.mut{color:var(--m)}.good{color:var(--g)}.err{color:var(--r)}.warn{color:var(--a)}
+.tile{min-width:52px;height:52px;border-radius:12px;font-weight:800;font-size:18px;background:#1b2340;border:1px solid var(--line);position:relative;padding:0 10px}
+.tile small{position:absolute;bottom:1px;right:5px;font-size:9px;color:var(--m);font-weight:400}
+.tile.pop{animation:pop .5s both}@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.8)}}
+.tl{display:flex;flex-wrap:wrap;gap:8px;min-height:68px;padding:8px;border:1px dashed var(--line);border-radius:12px;align-content:flex-start}
+.win .tl{border-color:var(--g);box-shadow:0 0 24px #34d39933}.win .tile{background:#0f4a37;border-color:var(--g)}
+.gb{padding:6px}
+.dp{display:flex;gap:6px;overflow-x:auto;padding:22px 2px 8px}
+.cell{position:relative;flex:0 0 auto;min-width:50px;text-align:center;border:1px solid var(--line);border-radius:10px;padding:5px 3px;background:#151b30;color:var(--m);transition:background .3s,transform .3s,border-color .3s}
+.cell small{display:block;font-size:11px;opacity:.7}.cell b{font-size:16px}
+.cell.r{background:#0b3b30;color:#a7f3d0;border-color:#14674f}.cell.r::after{content:"✓";position:absolute;right:3px;top:0;font-size:9px}
+.cell.dep{background:#35246a;border-color:var(--v);color:#fff}.cell.cur{background:#0e4a57;border-color:var(--c);color:#fff;transform:translateY(-3px)}
+.cell.cur::before{content:"▼";position:absolute;top:-17px;left:50%;transform:translateX(-50%);color:var(--c);font-size:11px}
+.cell.up{background:#0f5a42;border-color:var(--g);color:#fff;transform:scale(1.1)}.cell.bad{background:#5a1f2c;border-color:var(--r);color:#fff}.cell.tg{outline:2px solid var(--a)}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:10px 0}
+.info div{background:#0a0e1c;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:12px;color:var(--m)}.info b{display:block;color:var(--t);font-size:16px}
+.bar{height:6px;background:#151b30;border-radius:9px;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--v),var(--c));transition:width .3s}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px;text-align:center;border-bottom:1px solid var(--line)}
+tr.row{cursor:pointer}tr.row:hover{background:#ffffff08}tr.sel{background:#22d3ee22}
+pre{background:#070a16;border:1px solid var(--line);border-radius:12px;padding:14px 0;overflow-x:auto;margin:0;font-size:13.5px}
+.ln{display:block;padding:1px 16px;border-left:3px solid transparent;opacity:.45;white-space:pre}.ln.on{opacity:1;background:#8b5cf622;border-left-color:var(--v)}.ln.done{opacity:.85}
+.k{color:#c4b5fd}.f{color:var(--c)}.n{color:var(--a)}
+.opt{display:block;width:100%;text-align:left;margin:6px 0}.opt.ok{border-color:var(--g);background:#0f4a37}.opt.bad{border-color:var(--r);background:#4a1f2c}
+.ttl{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sumb{font-size:clamp(28px,5vw,46px);font-weight:800}
+.fl{position:absolute;color:#8b5cf655;font-family:'JetBrains Mono',monospace;animation:fl 9s ease-in-out infinite alternate;pointer-events:none}
+@keyframes fl{to{transform:translateY(-24px) rotate(6deg)}}
+.hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.tn{opacity:0;transition:opacity .45s}.tn.show{opacity:1}
+svg text{font-family:'JetBrains Mono',monospace}
+.gc{display:grid;gap:3px}.gc i{height:12px;border-radius:3px;background:#151b30}.gc i.on{background:var(--v)}
+.m2 i{display:block;height:11px;border-radius:2px;background:#1b2340;transition:.8s}.m2 .rw{display:grid;gap:2px;margin-bottom:2px;overflow:hidden;transition:max-height .9s,opacity .9s,margin .9s;max-height:14px}.m2.col .rw.x{max-height:0;opacity:0;margin:0}
+.m2 i.on{background:var(--g)}
+.rv{opacity:0;transform:translateY(14px);transition:.6s}.rv.in{opacity:1;transform:none}
+.flow>div{padding:10px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);opacity:0;transform:translateY(10px);transition:.5s;margin:0 auto;max-width:420px;text-align:center}.flow.in>div{opacity:1;transform:none}.flow .ar{border:0;background:none;color:var(--v);padding:0}
+footer{text-align:center;color:var(--m);padding:60px 20px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}section{padding-top:48px}}
+@media(prefers-reduced-motion:reduce){*,body::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv,.tn,.flow>div{opacity:1;transform:none}}
+</style></head><body>
+<div id="prog"></div>
+<nav aria-label="Sections"><a href="#s1">Start</a><a href="#s2">Problem</a><a href="#s3">Intuition</a><a href="#s4">Why DP</a><a href="#s5">State</a><a href="#s6">Backwards</a><a href="#s7">Visualizer</a><a href="#s8">Partition</a><a href="#s9">Dry run</a><a href="#s10">Code</a><a href="#s11">Playground</a><a href="#s12">Time</a><a href="#s13">Space</a><a href="#s14">Quiz</a><a href="#s15">Recap</a></nav>
+
+<section id="s1" class="hero">
+<span class="fl" style="left:6%;top:18%;font-size:28px">Σ</span><span class="fl" style="right:8%;top:12%;font-size:22px">a + b = 11</span><span class="fl" style="right:14%;bottom:12%;font-size:30px">∑ ½</span><span class="fl" style="left:12%;bottom:8%;font-size:20px">dp[s] ∨ dp[s−x]</span>
+<div><span class="badge" style="color:var(--a)">Medium</span><span class="badge" style="color:var(--v)">Dynamic Programming</span><span class="badge" style="color:var(--c)">Time: O(n × target)</span><span class="badge" style="color:var(--c)">Space: O(target)</span></div>
+<p class="mut mono" style="margin:14px 0 0">LEETCODE 416</p>
+<h1>PARTITION <span class="grad">EQUAL SUBSET SUM</span></h1>
+<p class="lead" style="font-size:20px">Can you split one array into two perfectly balanced groups?</p>
+<div class="card glass"><div id="hSrc" class="tl" style="justify-content:center"></div>
+<div class="grid2" style="margin-top:12px" id="hGroups"><div class="gb"><b>GROUP A</b> <span class="mut mono">SUM A =</span> <span class="sumb good" id="hSA">0</span><div class="tl" id="hA"></div></div><div class="gb"><b>GROUP B</b> <span class="mut mono">SUM B =</span> <span class="sumb good" id="hSB">0</span><div class="tl" id="hB"></div></div></div>
+<p class="mono" id="hEq" style="text-align:center;font-size:22px;min-height:40px"></p></div>
+<div class="ctl"><button class="p" id="startBtn">Start Learning</button><button id="hReplay">Replay animation</button></div>
+</section>
+
+<section id="s2" class="rv"><h2>Understand the problem</h2>
+<p class="lead">Given an integer array, can you split it into two subsets whose sums are equal?</p>
+<div class="grid2"><div class="card"><b>What is a subset?</b><p class="mut">Any selection of elements from the array. You pick each element independently.</p></div><div class="card"><b>Used at most once</b><p class="mut">Each element lands in exactly one group. Two equal values are still two different elements.</p></div></div>
+<div class="card"><p class="mut">Every element goes into A or B, so A + B = total. If A = B, each is half of the total.</p>
+<div class="ctl" id="exTabs"></div><div id="exOut" style="margin-top:12px"></div></div></section>
+
+<section id="s3" class="rv"><h2>Build the intuition</h2>
+<p class="lead">“How can we know whether two equal-sum subsets exist?” Don't build both subsets. Shrink the question.</p>
+<div class="card"><div class="ctl" id="inTabs"></div><div id="inSteps" style="margin:12px 0"></div><div class="ctl"><button class="p" id="inNext">Next step</button><button id="inReset">Reset</button></div></div>
+<div class="grid2"><div class="card"><b class="warn">Original problem</b><p>Find two subsets with equal sums.</p></div><div class="card" style="border-color:var(--g)"><b class="good">Transformed problem</b><p>Find <b>one</b> subset with sum = total / 2. The leftover elements automatically sum to total − total/2 = total/2.</p></div></div>
+<p class="mut">Edge cases: odd total → false. Even total → target = total / 2. Target reachable → true, otherwise false.</p></section>
+
+<section id="s4" class="rv"><h2>Why Dynamic Programming?</h2>
+<p class="lead">For each number there are two choices: include it or exclude it. n numbers means 2ⁿ subsets, far too many to check one by one.</p>
+<div class="card"><div class="ctl" id="trTabs"></div><p class="mut" id="trTxt"></p><div style="overflow-x:auto"><div id="trBox" style="min-width:640px"></div></div>
+<p class="mut" style="font-size:13px">Green: path to target. Coral: overshoots or misses the target. Amber: a sum already seen at that depth (repeated work). Solid edge = include, dashed edge = exclude.</p></div>
+<div class="grid2"><div class="card"><b>It's 0/1 Knapsack</b><p class="mut">Each element can be used once, we want an exact sum, and every element is either taken or skipped.</p></div><div class="card"><b>0/1 vs unbounded</b><p class="mut">With [2] and target 4: unbounded can reuse the 2 (reach 4). 0/1 can use it once (reach only 0 and 2). Our problem is 0/1.</p></div></div></section>
+
+<section id="s5" class="rv"><h2>Understand the DP state</h2>
+<p class="lead"><code>dp[s]</code> = True if sum <code>s</code> can be formed using the numbers processed so far.</p>
+<div class="card"><p class="mono mut">nums = [1, 5, 11, 5], target = 11</p><div class="dp" id="stDp"></div>
+<p><b class="good">dp[0] = True</b>: sum 0 is always possible by selecting no elements. Everything else starts False because no positive sum has been formed yet.</p></div>
+<div class="card"><p class="mono grad" style="font-size:19px">dp[s] = dp[s] OR dp[s − num]   (only when s ≥ num)</p><p class="mut">A sum is possible if it was already possible without this number, OR if s − num was possible and we add this number to that subset.</p></div></section>
+
+<section id="s6" class="rv"><h2>Why do we iterate backwards?</h2>
+<pre style="margin-bottom:12px"><span class="ln">for num in nums:</span><span class="ln">    for s in range(target, num - 1, -1):</span><span class="ln">        dp[s] = dp[s] or dp[s - num]</span></pre>
+<p class="lead">Backwards, dp[s − num] still holds the state from <em>before</em> this number. Forwards, it may already include this number, so the same element gets used twice.</p>
+<div class="card"><div class="ctl"><b class="mono">nums = [2], target = 4</b><button class="p" id="bwGo">Animate both</button><button id="bwReset">Reset</button></div>
+<div class="grid2" style="margin-top:10px"><div><b class="good">Correct: backward</b><div class="dp" id="bwL"></div><p class="mono mut" id="bwLt"></p></div><div><b class="err">Incorrect: forward</b><div class="dp" id="bwR"></div><p class="mono mut" id="bwRt"></p><div class="ctl" id="bwDup"></div></div></div>
+<p id="bwRes"></p></div></section>
+
+<section id="s7" class="rv"><h2>Main interactive DP visualizer</h2>
+<p class="lead">nums = [1, 5, 11, 5], target = 11. All states come from really running the algorithm.</p>
+<div class="card"><div class="ctl" id="vzNums"></div><div class="dp" id="vzDp"></div><div class="info" id="vzInfo"></div><p id="vzExp" style="min-height:48px"></p>
+<div class="bar"><i id="vzBar"></i></div><p class="mut mono" id="vzCount"></p><p class="mono" id="vzReach"></p>
+<div class="ctl"><button class="p" id="vzPlay">Play</button><button id="vzPause">Pause</button><button id="vzBN">◀◀ Number</button><button id="vzPrev">◀ Step</button><button id="vzNext">Step ▶</button><button id="vzNN">Number ▶▶</button><button id="vzReset">Reset</button>
+<label class="mut">Speed <select id="vzSpeed" aria-label="Playback speed"><option value=".25">0.25x</option><option value=".5">0.5x</option><option value="1" selected>1x</option><option value="2">2x</option></select></label></div>
+<p class="mut" style="font-size:13px">▼ cyan: current sum s. Violet: s − num (dependency). Green: just became True. Soft green ✓: reachable. Amber outline: target.</p></div></section>
+
+<section id="s8" class="rv"><h2>Interactive partition visualization</h2>
+<p class="lead">Click tiles to move them into Group A. Each tile has its own id (#0, #1…), so the two 5s are different elements.</p>
+<div class="card"><div class="ctl" id="paTabs" style="margin-bottom:10px"></div><div id="paBox"></div></div></section>
+
+<section id="s9" class="rv"><h2>Complete dry run</h2>
+<p class="lead">nums = [1, 5, 11, 5], target = 11. Click a row to see its transitions and the array after that number.</p>
+<div class="card" style="overflow-x:auto"><table id="dry"></table><div class="dp" id="drDp"></div><div id="drTx" class="mono" style="font-size:13px;white-space:pre-line"></div>
+<div class="ctl" style="margin-top:10px"><button id="drA">Example: num 5, sum 6</button><button id="drB">Example: num 11, sum 11</button></div><p id="drEx" class="mono"></p></div></section>
+
+<section id="s10" class="rv"><h2>Python code explanation</h2>
+<div class="card"><pre id="code"></pre><p id="cExp" style="margin-top:14px"></p><div id="cViz"></div><div class="ctl"><button id="cPrev">Previous line</button><button id="cNext" class="p">Next line</button><button id="cReset">Reset</button></div></div></section>
+
+<section id="s11" class="rv"><h2>Advanced playground: the subset-sum lab</h2>
+<div class="card"><div class="grid2"><label>Numbers (comma separated)<input id="pgIn" value="1, 5, 11, 5"></label><label>Target (leave blank for total / 2)<input id="pgT" placeholder="auto" inputmode="numeric"></label></div>
+<div class="ctl" style="margin-top:10px"><button class="p" id="pgApply">Apply</button><label class="mut">Add <input id="pgAdd" style="width:80px" inputmode="numeric"></label><button id="pgAddB">+ Add</button><label class="mut">Speed <select id="pgSp"><option value=".5">0.5x</option><option value="1" selected>1x</option><option value="2">2x</option></select></label><button id="pgReset">Reset all</button></div>
+<div class="ctl" id="pgChips" style="margin:10px 0"></div><div id="pgSum"></div>
+<div class="ctl" id="pgTabs" style="margin:12px 0"></div><div id="pgOut"></div></div></section>
+
+<section id="s12" class="rv"><h2>Time complexity: O(n × target)</h2>
+<p class="lead">The outer loop handles n numbers. The inner loop checks up to target sums for each. Each check is constant work.</p>
+<div class="card"><div class="grid2"><label>Elements n: <b id="cxNv"></b><input type="range" id="cxN" min="1" max="10" value="4"></label><label>Target: <b id="cxTv"></b><input type="range" id="cxT" min="1" max="40" value="11"></label></div>
+<div class="ctl" style="margin:8px 0"><button class="p" id="cxGo">Animate traversal</button><span class="mono">operations: <b id="cxOps">0</b> / <b id="cxAll"></b></span></div><div id="cxGrid" class="gc"></div><p class="mut" style="font-size:13px">Rows = numbers. Each row sweeps right to left (backwards). Each cell = one possible dp transition.</p>
+<p id="cxDbl"></p><p class="mut">This is pseudo-polynomial time: the work depends on the numeric value of the target, not just how many numbers there are. Doubling the target's digits would square the work.</p></div>
+<div class="card"><b>Growth comparison</b> <span class="mut">(log scale; target held fixed)</span>
+<div class="grid2"><label>Input size n: <b id="gnv"></b><input type="range" id="gn" min="1" max="30" value="12"></label><label>Target T (for n × T): <b id="gtv"></b><input type="range" id="gt" min="1" max="1000" value="100"></label></div>
+<svg id="gSvg" viewBox="0 0 640 300" width="100%" role="img" aria-label="Growth of n, target, n times target and 2 to the n"></svg><p class="mono" id="gTab" style="font-size:13px"></p></div></section>
+
+<section id="s13" class="rv"><h2>Space complexity: O(target)</h2>
+<div class="card"><div class="grid2"><label>Elements n: <b id="spNv"></b><input type="range" id="spN" min="1" max="8" value="4"></label><label>Target: <b id="spTv"></b><input type="range" id="spT" min="1" max="30" value="11"></label></div>
+<div class="ctl" style="margin:8px 0"><button class="p" id="spGo">Animate memory</button></div><p class="mono" id="spPh"></p><div class="dp" id="spRow"></div>
+<p class="mut">One array is allocated, initialized, and then reused for every number. It is never copied per element.</p></div>
+<div class="card"><div class="ctl"><b>2D DP</b><button id="spCol" class="p">Collapse 2D → 1D</button><button id="spExp">Expand</button></div><div class="m2" id="spM" style="overflow-x:auto;margin:10px 0"></div><p id="spCnt"></p>
+<p class="mut">Reverse iteration is what makes this safe: row i only needs row i−1's values, and going right to left means those values are still untouched when we read them. Counts above are logical DP cells, not measured bytes.</p></div></section>
+
+<section id="s14" class="rv"><h2>Test your understanding</h2><div class="card"><div id="qz"></div></div></section>
+
+<section id="s15" class="rv"><h2>Final recap</h2>
+<div class="flow" id="flow"></div>
+<div class="card"><pre id="recap"></pre><p>Time: <b>O(n × target)</b> · Space: <b>O(target)</b></p></div>
+<footer><p style="font-size:20px;max-width:60ch;margin:auto">Dynamic Programming is not about trying every possibility. It is about remembering what is already possible and building from it.</p></footer></section>
+
+<script>
+(()=>{
+/*ALGO*/
+const sum=a=>a.reduce((x,y)=>x+y,0);
+function runDP(nums,target,rec){const dp=Array(target+1).fill(false);dp[0]=true;const steps=[];
+ nums.forEach((num,ni)=>{for(let s=target;s>=num;s--){const before=dp[s],dep=dp[s-num];dp[s]=dp[s]||dep;if(rec)steps.push({ni,num,s,p:s-num,dep,before,after:dp[s],ch:dp[s]&&!before,dp:dp.slice()})}});
+ return{dp,steps,ans:dp[target]}}
+function canPartition(nums){const t=sum(nums);if(t%2)return false;return runDP(nums,t/2,false).ans}
+function trace(dp0,num,target,fwd){const dp=dp0.slice(),st=[];const ss=[];if(fwd)for(let s=num;s<=target;s++)ss.push(s);else for(let s=target;s>=num;s--)ss.push(s);
+ for(const s of ss){const before=dp[s],dep=dp[s-num];dp[s]=dp[s]||dep;st.push({s,p:s-num,dep,before,after:dp[s],dp:dp.slice()})}return st}
+function reconstruct(nums,target){if(target<0||(target+1)*(nums.length+1)>3e6)return null;const n=nums.length,T=[];
+ for(let i=0;i<=n;i++)T.push(new Uint8Array(target+1));T[0][0]=1;
+ for(let i=1;i<=n;i++){const x=nums[i-1];for(let s=0;s<=target;s++)T[i][s]=T[i-1][s]||(s>=x&&T[i-1][s-x])?1:0}
+ if(!T[n][target])return null;const out=[];let s=target;for(let i=n;i>=1;i--){if(T[i-1][s])continue;out.push(i-1);s-=nums[i-1]}return out.reverse()}
+function buildTree(nums,target){const nodes=[];(function go(i,sm,d,slot,par,inc){const nd={d,sm,slot,par,inc,i,dead:sm>target,kids:0};nodes.push(nd);
+ if(nd.dead||i===nums.length)return;go(i+1,sm,d+1,slot*2,nd,false);go(i+1,sm+nums[i],d+1,slot*2+1,nd,true)})(0,0,0,0,null,null);
+ const seen={};nodes.forEach(n=>{const k=n.d+':'+n.sm;if(seen[k]&&!n.dead)n.rep=true;seen[k]=1;if(n.i===nums.length&&n.sm===target){n.win=true;for(let p=n;p;p=p.par)p.path=true}});return nodes}
+/*END*/
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const TM=()=>{const s=new Set();return{at(f,ms){const t=setTimeout(()=>{s.delete(t);f()},ms);s.add(t)},clear(){s.forEach(clearTimeout);s.clear()}}};
+const tile=(v,i)=>{const b=document.createElement('button');b.className='tile';b.innerHTML=`${v}<small>#${i}</small>`;return b};
+const flip=(els,fn)=>{const f=els.map(e=>e.getBoundingClientRect());fn();if(RM)return;els.forEach((e,i)=>{const l=e.getBoundingClientRect();e.style.transition='none';e.style.transform=`translate(${f[i].left-l.left}px,${f[i].top-l.top}px)`});
+ requestAnimationFrame(()=>requestAnimationFrame(()=>els.forEach(e=>{e.style.transition='transform .7s cubic-bezier(.2,.8,.2,1)';e.style.transform=''})))};
+const countUp=(el,to,ms=1100)=>{if(RM){el.textContent=to;return}const t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/ms);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
+const dpCells=(arr,cls={},lab=null)=>arr.map((v,i)=>`<div class="cell ${v?'r':''} ${cls[i]||''}"><small>${lab?lab[i]:i}</small><b>${v?'T':'F'}</b></div>`).join('');
+const comb=(a,t)=>a.length?a.join(' + ')+' = '+sum(a):'(empty) = 0';
+const tabs=(box,labels,on,cb)=>{box.innerHTML='';labels.forEach((l,i)=>{const b=document.createElement('button');b.textContent=l;b.onclick=()=>{[...box.children].forEach((c,j)=>c.classList.toggle('on',i===j));cb(i)};box.appendChild(b)});box.children[on].click()};
+/* nav */
+$('#startBtn').onclick=()=>$('#s2').scrollIntoView({behavior:'smooth'});
+const pr=$('#prog');addEventListener('scroll',()=>{const h=document.documentElement;pr.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.05});$$('.rv').forEach(e=>io.observe(e));
+/* hero */
+const H=TM();
+function hero(){H.clear();const src=$('#hSrc'),A=$('#hA'),B=$('#hB');[src,A,B].forEach(x=>x.innerHTML='');$('#hSA').textContent=$('#hSB').textContent='0';$('#hEq').innerHTML='';
+ const ts=[1,5,11,5].map((v,i)=>{const t=tile(v,i);t.classList.add('pop');t.style.animationDelay=i*150+'ms';src.appendChild(t);return t});
+ H.at(()=>{flip(ts,()=>ts.forEach((t,i)=>(i===2?B:A).appendChild(t)));countUp($('#hSA'),11);countUp($('#hSB'),11)},1500);
+ H.at(()=>{$('#hEq').innerHTML='&lt; 11 = 11 &gt; <span class="badge good" style="border-color:var(--g)">PERFECTLY BALANCED</span> <b class="good">TRUE</b>'},3000)}
+$('#hReplay').onclick=hero;hero();
+/* section 2 */
+const EXS=[[1,5,11,5],[1,2,3,5]];
+tabs($('#exTabs'),['nums = [1, 5, 11, 5]','nums = [1, 2, 3, 5]'],0,i=>{const nums=EXS[i],tot=sum(nums),ok=canPartition(nums);let h=`<p class="mono">total = ${tot} → <b class="${ok?'good':'err'}" style="font-size:22px">${ok?'TRUE':'FALSE'}</b></p>`;
+ if(ok){let ids=reconstruct(nums,tot/2),mx=nums.indexOf(Math.max(...nums));if(ids.includes(mx))ids=nums.map((_,k)=>k).filter(k=>!ids.includes(k));const a=ids.map(k=>nums[k]),b=nums.filter((_,k)=>!ids.includes(k));
+ h+=`<div class="grid2"><div class="card"><b>GROUP A</b><div class="mono">${comb(a)}</div></div><div class="card"><b>GROUP B</b><div class="mono">${comb(b)}</div></div></div><p class="mut">Both groups sum to ${tot/2}.</p>`}
+ else h+=`<p>Total ${tot} is odd. Two equal integer sums would add up to an even number (2 × half), so no split can work.</p>`;$('#exOut').innerHTML=h});
+/* section 3 */
+let inI=0,inK=0;const inSt=()=>{const nums=EXS[inI],t=sum(nums),ok=t%2===0;return[`Step 1: total = ${nums.join(' + ')} = <b>${t}</b>`,ok?`Step 2: target = ${t} / 2 = <b>${t/2}</b>`:`Step 2: ${t} is odd → return <b class="err">False</b> immediately`,ok?`Step 3: Is there <b>one</b> subset with sum ${t/2}? ${canPartition(nums)?'<b class="good">Yes</b>':'<b class="err">No</b>'}. The rest then sums to ${t}−${t/2} = ${t/2}.`:'Nothing more to check.']};
+function inDraw(){$('#inSteps').innerHTML=inSt().slice(0,inK).map(s=>`<p class="tn show">${s}</p>`).join('')||'<p class="mut">Press Next step.</p>';$('#inNext').disabled=inK>=3}
+tabs($('#inTabs'),['[1, 5, 11, 5]','[1, 2, 3, 5]'],0,i=>{inI=i;inK=0;inDraw()});
+$('#inNext').onclick=()=>{inK++;inDraw()};$('#inReset').onclick=()=>{inK=0;inDraw()};
+/* tree */
+const TR=TM();
+function drawTree(box,nums,target,anim){TR.clear();const nodes=buildTree(nums,target),n=nums.length,W=1000,r=n<=3?16:n<=4?12:n<=5?9:5,H2=40+n*72;
+ const X=nd=>(nd.slot+.5)/Math.pow(2,nd.d)*W,Y=nd=>26+nd.d*72;let e='',c='';
+ nodes.forEach(nd=>{const col=nd.path?'#34d399':nd.dead||(nd.i===n&&!nd.win)?'#fb7185':nd.rep?'#fbbf24':'#8b5cf6';
+  if(nd.par)e+=`<line class="tn d${nd.d}" x1="${X(nd.par)}" y1="${Y(nd.par)}" x2="${X(nd)}" y2="${Y(nd)}" stroke="${nd.path?'#34d399':'#475569'}" stroke-width="${nd.path?2.5:1.2}" ${nd.inc?'':'stroke-dasharray="4 3"'}/>`;
+  c+=`<g class="tn d${nd.d}"><circle cx="${X(nd)}" cy="${Y(nd)}" r="${r}" fill="${col}33" stroke="${col}" stroke-width="2"/>${r>=9?`<text x="${X(nd)}" y="${Y(nd)+4}" text-anchor="middle" font-size="${r>12?12:10}" fill="#fff">${nd.sm}</text>`:''}</g>`;
+  if(n<=3&&nd.par)c+=`<text class="tn d${nd.d}" x="${(X(nd)+X(nd.par))/2+(nd.inc?10:-10)}" y="${(Y(nd)+Y(nd.par))/2}" font-size="11" fill="#94a3b8" text-anchor="middle">${nd.inc?'+'+nums[nd.par.i]:'skip '+nums[nd.par.i]}</text>`});
+ box.innerHTML=`<svg viewBox="0 0 ${W} ${H2}" width="100%" role="img" aria-label="Include or exclude decision tree">${e}${c}</svg>`;
+ for(let d=0;d<=n;d++){const f=()=>box.querySelectorAll('.d'+d).forEach(x=>x.classList.add('show'));anim&&!RM?TR.at(f,d*650):f()}
+ return nodes}
+const TRS=[{n:[1,5,11],t:11,x:'nums = [1, 5, 11], subset-sum target 11. Pruned branches stop once the sum exceeds 11.'},{n:[1,2,3],t:3,x:'nums = [1, 2, 3], target 3. Sum 3 is reached by {1,2} and {3}; amber nodes show the same sum computed again.'}];
+tabs($('#trTabs'),['[1, 5, 11]','[1, 2, 3]'],0,i=>{$('#trTxt').textContent=TRS[i].x;drawTree($('#trBox'),TRS[i].n,TRS[i].t,true)});
+/* state */
+$('#stDp').innerHTML=dpCells([true,...Array(11).fill(false)],{11:'tg'});
+/* backward vs forward */
+const BW=TM();let bwFinal=null;
+function bwReset(){BW.clear();const z=[true,false,false,false,false];$('#bwL').innerHTML=$('#bwR').innerHTML=dpCells(z,{4:'tg'});$('#bwLt').textContent=$('#bwRt').textContent='';$('#bwDup').innerHTML='';$('#bwRes').innerHTML=''}
+function bwGo(){bwReset();const z=[true,false,false,false,false],L=trace(z,2,4,false),R=trace(z,2,4,true),d=RM?0:1;
+ L.forEach((s,i)=>BW.at(()=>{$('#bwL').innerHTML=dpCells(s.dp,{[s.s]:'cur',[s.p]:'dep',4:s.s===4?'cur':'tg'});$('#bwLt').textContent=`s=${s.s}: dp[${s.s}] = ${s.before?'T':'F'} OR dp[${s.p}](${s.dep?'T':'F'}) = ${s.after?'T':'F'}`},i*1100*d));
+ R.forEach((s,i)=>BW.at(()=>{$('#bwR').innerHTML=dpCells(s.dp,{[s.s]:s.after&&!s.before?'bad':'cur',[s.p]:'dep',4:'tg'});$('#bwRt').textContent=`s=${s.s}: dp[${s.s}] = ${s.before?'T':'F'} OR dp[${s.p}](${s.dep?'T':'F'}) = ${s.after?'T':'F'}`;
+  if(s.s===4&&s.dep)$('#bwDup').innerHTML=`<span class="tile" style="min-width:44px;height:44px;line-height:44px">2</span><b class="err">+</b><span class="tile pop" style="min-width:44px;height:44px;line-height:44px;border-color:var(--r)">2</span><span class="err">the same element used twice!</span>`},i*1100*d));
+ BW.at(()=>{const fa=L[L.length-1].dp[4],fb=R[R.length-1].dp[4];$('#bwRes').innerHTML=`Backward: dp[4] = <b class="${fa?'good':'err'}">${fa}</b> (correct, [2] cannot make 4). Forward: dp[4] = <b class="${fb?'good':'err'}">${fb}</b> (wrong, the single 2 was reused).`},4*1100*d)}
+$('#bwGo').onclick=bwGo;$('#bwReset').onclick=bwReset;bwReset();
+/* main visualizer */
+const V={i:-1,t:null,nums:[1,5,11,5],T:11};V.res=runDP(V.nums,V.T,true);V.S=V.res.steps;
+$('#vzNums').innerHTML=V.nums.map((v,i)=>`<span class="tile" id="vn${i}" style="line-height:52px">${v}</span>`).join('');
+const grpEnd=ni=>{let k=-1;V.S.forEach((s,i)=>{if(s.ni<=ni)k=i});return k};
+function vzR(){const s=V.S[V.i],n=V.S.length,fin=V.i===n-1,dp=s?s.dp:[true,...Array(V.T).fill(false)],cls={[V.T]:'tg'};
+ if(s){cls[s.p]='dep';cls[s.s]=s.ch?'up':'cur'}
+ $('#vzDp').innerHTML=dpCells(dp,cls);
+ V.nums.forEach((_,i)=>{const e=$('#vn'+i);e.style.background=s&&s.ni===i?'var(--v)':s&&s.ni>i||fin?'#1b2340':'';e.style.opacity=s&&s.ni>i||fin?.45:1;e.style.borderColor=s&&s.ni===i?'var(--c)':''});
+ $('#vzInfo').innerHTML=s?[['Current element',s.num],['Current sum s',s.s],['Previous sum s−num',s.p],['dp[s−num]',s.dep?'True':'False'],['dp[s] before',s.before?'True':'False'],['dp[s] after',s.after?'True':'False'],['Changed?',s.ch?'Yes':'No']].map(([k,v])=>`<div>${k}<b>${v}</b></div>`).join(''):'<div>Press Play or Step<b>—</b></div>';
+ $('#vzExp').innerHTML=s?`Number ${s.num} (element #${s.ni}), checking sum ${s.s}: <span class="mono">dp[${s.s}] = ${s.before?'True':'False'} OR dp[${s.p}] (${s.dep?'True':'False'}) = <b>${s.after?'True':'False'}</b></span>. ${s.ch?`<span class="good">Sum ${s.s} is newly reachable: take a subset for ${s.p} and add ${s.num}.</span>`:s.before?'Already reachable, nothing changes.':'Sum '+s.p+' is not reachable, so adding '+s.num+' cannot make '+s.s+'.'}`:'Initial: only sum 0 is reachable (empty subset).';
+ $('#vzBar').style.width=((V.i+1)/n*100)+'%';$('#vzCount').textContent=`Step ${V.i+1} / ${n}`+(s?` · number ${s.ni+1} of ${V.nums.length}`:'');
+ $('#vzReach').innerHTML='Reachable sums: '+dp.map((v,i)=>v?i:null).filter(x=>x!==null).join(', ')+(fin?` → <b class="${V.res.ans?'good':'err'}">dp[${V.T}] = ${V.res.ans?'TRUE':'FALSE'}</b>`:'');
+ $('#vzPrev').disabled=V.i<0;$('#vzNext').disabled=fin;$('#vzBN').disabled=V.i<0;$('#vzNN').disabled=fin}
+const vzStop=()=>{clearTimeout(V.t);V.t=null};
+const vzGo=i=>{V.i=Math.max(-1,Math.min(V.S.length-1,i));vzR()};
+function vzTick(){if(V.i>=V.S.length-1){vzStop();return}vzGo(V.i+1);V.t=setTimeout(vzTick,800/parseFloat($('#vzSpeed').value))}
+$('#vzPlay').onclick=()=>{if(V.t)return;if(V.i>=V.S.length-1)V.i=-1;vzTick()};$('#vzPause').onclick=vzStop;
+$('#vzNext').onclick=()=>{vzStop();vzGo(V.i+1)};$('#vzPrev').onclick=()=>{vzStop();vzGo(V.i-1)};$('#vzReset').onclick=()=>{vzStop();vzGo(-1)};
+$('#vzNN').onclick=()=>{vzStop();const cur=V.S[V.i+1];vzGo(grpEnd(cur.ni))};
+$('#vzBN').onclick=()=>{vzStop();const cur=V.S[V.i];vzGo(cur&&V.S[V.i-1]&&V.S[V.i-1].ni===cur.ni?grpEnd(cur.ni-1):cur?grpEnd(cur.ni-1):-1)};
+vzR();
+/* partition component */
+function mountPart(el,nums,target){const tot=sum(nums);
+ el.innerHTML='<div class="grid2"><div class="gb"><b>Group A</b> <span class="mut">sum</span> <b class="sa">0</b><div class="tl ga"></div></div><div class="gb"><b>Group B</b> <span class="mut">sum</span> <b class="sb">0</b><div class="tl gbb"></div></div></div><p class="st" aria-live="polite"></p><div class="ctl"><button class="p show">Show one valid partition</button><button class="rst">Reset</button></div>';
+ const A=el.querySelector('.ga'),B=el.querySelector('.gbb'),sel=new Set(),st=el.querySelector('.st'),reach=target!==null&&target>=0&&target<=5e4&&runDP(nums,target,false).ans;
+ const ts=nums.map((v,i)=>{const t=tile(v,i);t.setAttribute('aria-pressed','false');t.onclick=()=>{sel.has(i)?sel.delete(i):sel.add(i);paint(true)};return t});
+ function paint(mv,msg){const go=()=>ts.forEach((t,i)=>{(sel.has(i)?A:B).appendChild(t);t.setAttribute('aria-pressed',sel.has(i))});mv?flip(ts,go):go();
+  const sa=sum([...sel].map(i=>nums[i])),sb=tot-sa;el.querySelector('.sa').textContent=sa;el.querySelector('.sb').textContent=sb;const perfect=sa===sb;el.classList.toggle('win',perfect);
+  st.innerHTML=msg||(perfect?`<b class="good">Perfect partition!</b> Group A = ${sa} = Group B. Difference 0.`:`Difference |A − B| = <b>${Math.abs(sa-sb)}</b>. `+(tot%2?`<span class="err">Impossible: total ${tot} is odd, so equal halves cannot exist.</span>`:reach?'<span class="warn">Not yet balanced.</span> A valid split exists.':`<span class="err">Impossible: no subset sums to ${target}.</span>`))}
+ el.querySelector('.rst').onclick=()=>{sel.clear();paint(true)};
+ el.querySelector('.show').onclick=()=>{const ids=target===null?null:reconstruct(nums,target);if(!ids){st.innerHTML=`<span class="err">No valid selection exists: ${tot%2?'the total '+tot+' is odd':'no subset sums to '+target}.</span>`;return}sel.clear();ids.forEach(i=>sel.add(i));paint(true,`Reconstructed subset: elements ${ids.map(i=>'#'+i+' ('+nums[i]+')').join(', ')} sum to ${target}.`)};
+ paint(false)}
+const PA=[[1,5,11,5],[1,2,3,5]];tabs($('#paTabs'),['[1, 5, 11, 5]','[1, 2, 3, 5] (impossible)'],0,i=>mountPart($('#paBox'),PA[i],sum(PA[i])%2?null:sum(PA[i])/2));
+/* dry run */
+{const S=V.S,groups=V.nums.map((v,i)=>({v,i,steps:S.filter(s=>s.ni===i)}));
+ $('#dry').innerHTML='<tr><th>Number processed</th><th>Newly reachable sums</th></tr>'+groups.map(g=>`<tr class="row" data-i="${g.i}"><td>${g.v}</td><td>${g.steps.filter(s=>s.ch).map(s=>s.s).sort((a,b)=>a-b).join(', ')||'—'}</td></tr>`).join('');
+ const show=i=>{$$('#dry tr.row').forEach(r=>r.classList.toggle('sel',+r.dataset.i===i));const g=groups[i],last=g.steps[g.steps.length-1],ch={};g.steps.filter(s=>s.ch).forEach(s=>ch[s.s]=1);
+  $('#drDp').innerHTML=dpCells(last.dp,ch?Object.fromEntries(Object.keys(ch).map(k=>[k,'up'])):{});
+  $('#drTx').textContent=g.steps.filter(s=>s.ch).map(s=>`dp[${s.s}] = False OR dp[${s.p}] = True → subset for ${s.p} plus ${g.v}`).join('\n')||'No new sums.';$('#drEx').textContent=''};
+ $$('#dry tr.row').forEach(r=>r.onclick=()=>show(+r.dataset.i));show(0);
+ const ex=(i,s)=>{show(i);const st=S.find(x=>x.ni===i&&x.s===s);$('#drEx').textContent=`dp[${s}] = dp[${s}] OR dp[${s}-${st.num}]\ndp[${s}] = ${st.before?'True':'False'} OR dp[${st.p}]\ndp[${s}] = ${st.before?'True':'False'} OR ${st.dep?'True':'False'}\ndp[${s}] = ${st.after?'True':'False'}`;$('#drEx').style.whiteSpace='pre-line'};
+ $('#drA').onclick=()=>ex(1,6);$('#drB').onclick=()=>ex(2,11)}
+/* code */
+const CODE=[['class Solution:','Wraps the solution for LeetCode.','The judge calls a method on this class.',0],
+['    def canPartition(self, nums: list[int]) -> bool:','Takes the array, returns a boolean.','The entry point.',0],
+['        total = sum(nums)','Adds up every element.','We first need the total to know what each half must be.',()=>'[1,5,11,5] → total = 22'],
+['        if total % 2:','Checks whether the total is odd.','An odd total can\'t be split into two equal whole-number sums.',()=>'11 % 2 = 1 → truthy'],
+['            return False','Stops early with False.','No DP is needed when halves can\'t be equal. This also protects the integer division below.',0],
+['        target = total // 2','Half the total, using integer division.','Total is even here, so // gives the exact half. One subset reaching it forces the other to match.',()=>'22 // 2 = 11'],
+['        dp = [False] * (target + 1)','One Boolean per sum from 0 to target.','Sums 0..target is target + 1 values. False means not reachable yet.',()=>`<div class="dp">${dpCells(Array(12).fill(false))}</div>`],
+['        dp[0] = True','Sum 0 is reachable.','Choosing no elements always makes 0. Without it nothing else can ever become True.',()=>`<div class="dp">${dpCells([true,...Array(11).fill(false)])}</div>`],
+['        for num in nums:','Process each element once.','The outer loop decides each element\'s include/skip choice exactly once (0/1 selection).',()=>'num = 1, then 5, then 11, then 5'],
+['            for s in range(target, num - 1, -1):','Visit sums from target down to num.','Backwards so dp[s - num] hasn\'t been changed by this num yet (no reuse). It stops at num because s < num would need a negative index.',()=>'11 ← 10 ← 9 ← … ← num'],
+['                dp[s] = dp[s] or dp[s - num]','Boolean OR of "already possible" and "possible after adding num".','OR is right because we only ask whether the sum is reachable, not how many ways.',()=>'num=5, s=6: dp[6] = False or dp[1](True) = True'],
+['        return dp[target]','Return whether the target is reachable.','dp[target] is True exactly when some subset sums to total/2, which means a valid partition exists.',()=>'dp[11] = True → return True']];
+const hl=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\b(class|def|if|for|in|return|or)\b/g,'§k$1§e').replace(/\b(sum|range)\b/g,'§f$1§e').replace(/\b(True|False|\d+)\b/g,'§n$1§e').replace(/§k/g,'<span class="k">').replace(/§f/g,'<span class="f">').replace(/§n/g,'<span class="n">').replace(/§e/g,'</span>');
+$('#code').innerHTML=CODE.map(l=>`<span class="ln">${hl(l[0])}</span>`).join('');$('#recap').innerHTML=CODE.map(l=>`<span class="ln done">${hl(l[0])}</span>`).join('');
+let ci=-1;function cShow(){$$('#code .ln').forEach((e,i)=>{e.classList.toggle('on',i===ci);e.classList.toggle('done',i<ci)});const l=CODE[ci];
+ $('#cExp').innerHTML=l?`<b>What:</b> ${l[1]}<br><b>Why:</b> ${l[2]}`:'<span class="mut">Press Next line.</span>';$('#cViz').innerHTML=l&&l[3]?`<div class="mono mut" style="font-size:13px">${l[3]()}</div>`:'';$('#cPrev').disabled=ci<0;$('#cNext').disabled=ci>=CODE.length-1}
+$('#cNext').onclick=()=>{ci++;cShow()};$('#cPrev').onclick=()=>{ci--;cShow()};$('#cReset').onclick=()=>{ci=-1;cShow()};cShow();
+/* playground */
+const P={nums:[1,5,11,5],tO:null,mode:0,k:-1,t:null};const PT=TM();
+const parseNums=txt=>{const tk=txt.trim().split(/[\s,]+/).filter(Boolean);if(!tk.length)return{err:'Enter at least one number.'};const n=tk.map(Number);
+ if(n.some(x=>!Number.isInteger(x)))return{err:'Only whole numbers are allowed (invalid text found).'};if(n.some(x=>x<0))return{err:'Negative values are not allowed.'};if(n.some(x=>x>10000))return{err:'Values must be ≤ 10000.'};if(n.length>200)return{err:'At most 200 numbers.'};return{nums:n}};
+function pgTarget(){const tot=sum(P.nums);if(P.tO!==null)return P.tO;return tot%2?null:tot/2}
+function pgHead(){const tot=sum(P.nums),t=pgTarget();let ans;if(t===null)ans=false;else if(t>5e4)ans=null;else ans=runDP(P.nums,t,false).ans;
+ $('#pgChips').innerHTML=P.nums.map((v,i)=>`<span class="badge">${v} <button aria-label="Remove ${v} (#${i})" data-i="${i}" style="padding:0 6px">×</button></span>`).join('');
+ $$('#pgChips button').forEach(b=>b.onclick=()=>{P.nums.splice(+b.dataset.i,1);if(!P.nums.length)P.nums=[1];$('#pgIn').value=P.nums.join(', ');pgRender()});
+ $('#pgSum').innerHTML=`<p class="mono">total = ${tot} · target = ${t===null?'—':t}${P.tO===null?' (auto)':' (custom)'} · result: ${ans===null?'<span class="err">too large</span>':`<b class="${ans?'good':'err'}">${ans?'TRUE':'FALSE'}</b>`}${P.tO===null&&tot%2?' <span class="mut">(odd total → False immediately)</span>':''}${t===0?' <span class="mut">(target 0: empty subset)</span>':''}</p>`}
+function pgRender(){PT.clear();TR.clear();pgHead();const out=$('#pgOut'),t=pgTarget(),n=P.nums,sp=parseFloat($('#pgSp').value);P.k=-1;
+ if(P.mode===0){mountPart(out,n,t);return}
+ if(P.mode===4){const T=[[[1,5,11,5],true],[[1,2,3,5],false],[[2,2,2,2],true],[[1,1,1,1,1],false],[[100,100],true],[[1],false]];
+  out.innerHTML='<div class="ctl">'+T.map((x,i)=>`<button data-i="${i}">Load [${x[0]}]</button>`).join('')+'</div><table style="margin-top:10px"><tr><th>nums</th><th>expected</th><th>actual</th><th></th></tr>'+T.map(x=>{const a=canPartition(x[0]);return `<tr><td class="mono">[${x[0]}]</td><td>${x[1]}</td><td>${a}</td><td class="${a===x[1]?'good':'err'}">${a===x[1]?'PASS':'FAIL'}</td></tr>`}).join('')+'</table><p class="mut">Also try: [0, 0] (true), [0, 1] (false), [] (rejected), [-1] (rejected), "abc" (rejected). Use the input above for custom cases.</p>';
+  $$('#pgOut button').forEach(b=>b.onclick=()=>{P.nums=T[+b.dataset.i][0].slice();P.tO=null;$('#pgIn').value=P.nums.join(', ');$('#pgT').value='';P.mode=0;$$('#pgTabs button').forEach((c,j)=>c.classList.toggle('on',j===0));pgRender()});return}
+ if(t===null){out.innerHTML='<p class="warn">Total is odd, so the algorithm returns False immediately and builds no DP. Enter a custom target to explore subset-sum.</p>';return}
+ if(P.mode===1){const R=runDP(n,t,false);const est=n.reduce((a,x)=>a+Math.max(0,t-x+1),0);if(t>300||est>3000){out.innerHTML='<p class="warn">Simulator supports target ≤ 300 and ≤ 3000 transitions. Use Subset finder or Edge tests for large inputs.</p>';return}
+  const S=runDP(n,t,true).steps;const draw=()=>{const s=S[P.k],dp=s?s.dp:[true,...Array(t).fill(false)],cl={[t]:'tg'};if(s){cl[s.p]='dep';cl[s.s]=s.ch?'up':'cur'}
+   $('#sDp').innerHTML=dpCells(dp,cl);$('#sTx').innerHTML=s?`num ${s.num}: dp[${s.s}] = ${s.before?'T':'F'} OR dp[${s.p}](${s.dep?'T':'F'}) = <b>${s.after?'T':'F'}</b> · step ${P.k+1}/${S.length}`:`Initial. ${S.length} transitions to run.`;$('#sPrev').disabled=P.k<0;$('#sNext').disabled=P.k>=S.length-1};
+  out.innerHTML='<div class="dp" id="sDp"></div><p class="mono" id="sTx"></p><div class="ctl"><button class="p" id="sPlay">Play</button><button id="sPause">Pause</button><button id="sPrev">Prev</button><button id="sNext">Next</button><button id="sRst">Reset</button></div>';
+  const tick=()=>{if(P.k>=S.length-1)return;P.k++;draw();PT.at(tick,700/sp)};draw();
+  $('#sPlay').onclick=()=>{PT.clear();if(P.k>=S.length-1)P.k=-1;tick()};$('#sPause').onclick=()=>PT.clear();$('#sNext').onclick=()=>{PT.clear();P.k++;draw()};$('#sPrev').onclick=()=>{PT.clear();P.k--;draw()};$('#sRst').onclick=()=>{PT.clear();P.k=-1;draw()};return}
+ if(P.mode===2){if(n.length>6){out.innerHTML='<p class="warn">Decision tree is limited to 6 numbers (64 leaves) to keep the browser fast. Remove some numbers.</p>';return}
+  out.innerHTML='<div style="overflow-x:auto"><div id="pgTree" style="min-width:640px"></div></div><p class="mut" style="font-size:13px">Green: target-reaching subsets. Coral: dead ends. Amber: repeated sums. Dashed = skip, solid = include.</p>';const nd=drawTree($('#pgTree'),n,t,sp>0);out.insertAdjacentHTML('beforeend',`<p>${nd.filter(x=>x.win).length} target-reaching leaf path(s), ${nd.filter(x=>x.rep).length} repeated sum node(s), ${nd.length} nodes drawn.</p>`);return}
+ if(P.mode===3){const ids=reconstruct(n,t);if(!ids){out.innerHTML=`<p class="err">No subset sums to ${t}.</p>`;return}const sel=ids.map(i=>n[i]),rest=n.filter((_,i)=>!ids.includes(i));
+  out.innerHTML=`<div class="grid2"><div class="card"><b>Selected subset</b><div class="tl">${ids.map(i=>tile(n[i],i).outerHTML).join('')}</div><p class="mono">sum = ${sum(sel)}</p></div><div class="card"><b>Remaining</b><div class="tl">${n.map((v,i)=>ids.includes(i)?'':tile(v,i).outerHTML).join('')}</div><p class="mono">sum = ${sum(rest)}</p></div></div><p>Validation: selected = ${sum(sel)} ${sum(sel)===t?'= target ✓':'≠ target ✗'}${P.tO===null?`; remaining = ${sum(rest)} ${sum(rest)===sum(sel)?'= selected ✓':'✗'}`:''}</p>`}}
+tabs($('#pgTabs'),['A · Partition','B · DP array','C · Decision tree','D · Subset finder','E · Edge tests'],0,i=>{P.mode=i;pgRender()});
+const pgErr=m=>{$('#pgSum').innerHTML=`<p class="err"><b>Input error:</b> ${m}</p>`};
+function pgApply(){const r=parseNums($('#pgIn').value);if(r.err)return pgErr(r.err);const tt=$('#pgT').value.trim();let tO=null;if(tt!==''){tO=Number(tt);if(!Number.isInteger(tO)||tO<0||tO>5e4)return pgErr('Target must be a whole number from 0 to 50000, or blank.')}P.nums=r.nums;P.tO=tO;pgRender()}
+$('#pgApply').onclick=pgApply;$('#pgIn').onkeydown=$('#pgT').onkeydown=e=>{if(e.key==='Enter')pgApply()};
+$('#pgAddB').onclick=()=>{const r=parseNums($('#pgAdd').value);if(r.err||r.nums.length!==1)return pgErr(r.err||'Add one number at a time.');if(P.nums.length>=200)return pgErr('At most 200 numbers.');P.nums.push(r.nums[0]);$('#pgIn').value=P.nums.join(', ');$('#pgAdd').value='';pgRender()};
+$('#pgSp').onchange=pgRender;$('#pgReset').onclick=()=>{P.nums=[1,5,11,5];P.tO=null;$('#pgIn').value='1, 5, 11, 5';$('#pgT').value='';$('#pgSp').value='1';$('#pgTabs button')[0]||0;$$('#pgTabs button')[0].click()};
+/* complexity grid */
+let cxRaf=0;function cxBuild(){cancelAnimationFrame(cxRaf);const n=+$('#cxN').value,T=+$('#cxT').value;$('#cxNv').textContent=n;$('#cxTv').textContent=T;$('#cxAll').textContent=n*T;$('#cxOps').textContent=0;
+ const g=$('#cxGrid');g.style.gridTemplateColumns=`repeat(${T},1fr)`;g.innerHTML='<i></i>'.repeat(n*T);
+ $('#cxDbl').innerHTML=`Now: ${n} × ${T} = <b>${n*T}</b> operations. Doubling both: ${2*n} × ${2*T} = <b>${4*n*T}</b> — <b class="warn">4× the work</b>.`}
+$('#cxN').oninput=$('#cxT').oninput=cxBuild;
+$('#cxGo').onclick=()=>{cxBuild();const n=+$('#cxN').value,T=+$('#cxT').value,cells=[...$('#cxGrid').children],order=[];for(let r=0;r<n;r++)for(let c=T-1;c>=0;c--)order.push(r*T+c);
+ if(RM){cells.forEach(c=>c.classList.add('on'));$('#cxOps').textContent=n*T;return}let k=0;const per=Math.max(1,Math.ceil(order.length/120));const f=()=>{for(let j=0;j<per&&k<order.length;j++)cells[order[k++]].classList.add('on');$('#cxOps').textContent=k;if(k<order.length)cxRaf=requestAnimationFrame(f)};f()};cxBuild();
+/* growth graph */
+function gRender(){const N=+$('#gn').value,T=+$('#gt').value;$('#gnv').textContent=N;$('#gtv').textContent=T;const W=640,Hh=300,L=48,B=30,pw=W-L-12,ph=Hh-B-14,ymax=10;
+ const X=n=>L+(n-1)/29*pw,Y=v=>14+ph-(Math.log10(Math.max(v,1))/ymax)*ph;
+ const ser=[['n',n=>n,'#22d3ee'],['target',n=>T,'#fbbf24'],['n × target',n=>n*T,'#8b5cf6'],['2ⁿ',n=>Math.pow(2,n),'#fb7185']];let s='';
+ for(let k=0;k<=10;k+=2)s+=`<line x1="${L}" x2="${W-12}" y1="${Y(Math.pow(10,k))}" y2="${Y(Math.pow(10,k))}" stroke="#243049"/><text x="${L-6}" y="${Y(Math.pow(10,k))+4}" font-size="10" fill="#94a3b8" text-anchor="end">10^${k}</text>`;
+ for(let n=5;n<=30;n+=5)s+=`<text x="${X(n)}" y="${Hh-12}" font-size="10" fill="#94a3b8" text-anchor="middle">${n}</text>`;
+ s+=`<text x="${W/2}" y="${Hh-1}" font-size="10" fill="#94a3b8" text-anchor="middle">n (number of elements)</text>`;
+ ser.forEach(([nm,f,c],i)=>{const pts=Array.from({length:30},(_,j)=>`${X(j+1)},${Y(f(j+1))}`).join(' ');s+=`<polyline points="${pts}" fill="none" stroke="${c}" stroke-width="2.5" pathLength="1" stroke-dasharray="1" ${RM?'':`style="animation:dr 1.1s ease both"`}/><text x="${W-14}" y="${Y(f(30))+(i===1?-4:4)}" font-size="11" fill="${c}" text-anchor="end">${nm}</text>`});
+ s+=`<line x1="${X(N)}" x2="${X(N)}" y1="14" y2="${14+ph}" stroke="#fff" stroke-dasharray="3 3" opacity=".5"/><text x="${L+4}" y="12" font-size="10" fill="#94a3b8">operations (log₁₀ scale)</text>`;
+ $('#gSvg').innerHTML=`<style>@keyframes dr{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}</style>`+s;
+ $('#gTab').innerHTML=`At n = ${N}: n = ${N} · target = ${T} · n×target = ${(N*T).toLocaleString()} · 2ⁿ = ${Math.pow(2,N).toLocaleString()}`}
+$('#gn').oninput=$('#gt').oninput=gRender;gRender();
+/* space */
+const SP=TM(),SN=[1,5,11,5,7,3,2,9];
+function spBuild(){SP.clear();const n=+$('#spN').value,T=+$('#spT').value;$('#spNv').textContent=n;$('#spTv').textContent=T;$('#spRow').innerHTML=dpCells(Array(T+1).fill(false)).replace(/class="cell /g,'class="cell " style="opacity:.25" data-x="1" class="cell ');
+ $('#spRow').innerHTML=dpCells(Array(T+1).fill(false));$('#spPh').textContent='Press Animate memory.';
+ const rows=Array.from({length:n+1},(_,r)=>`<div class="rw ${r>0?'x':''}" style="grid-template-columns:repeat(${T+1},1fr)">${'<i></i>'.repeat(T+1)}</div>`).join('');$('#spM').className='m2';$('#spM').innerHTML=rows;
+ $('#spCnt').innerHTML=`2D DP: (n+1) × (T+1) = ${n+1} × ${T+1} = <b>${(n+1)*(T+1)}</b> logical cells. 1D DP: T+1 = <b class="good">${T+1}</b> logical cells. Space = O(target).`}
+$('#spN').oninput=$('#spT').oninput=spBuild;$('#spCol').onclick=()=>$('#spM').classList.add('col');$('#spExp').onclick=()=>$('#spM').classList.remove('col');
+$('#spGo').onclick=()=>{spBuild();const n=+$('#spN').value,T=+$('#spT').value,nums=SN.slice(0,n),row=$('#spRow'),d=RM?0:1;let t=0;
+ const cells=()=>[...row.children];const step=(f,ms)=>{SP.at(f,t);t+=ms*d};
+ step(()=>{$('#spPh').textContent=`1. Allocate ${T+1} Boolean cells…`;row.innerHTML=dpCells(Array(T+1).fill(false)).replace(/class="cell /g,'style="opacity:.2" class="cell ')},400);
+ for(let i=0;i<=T;i++)step(()=>{const c=cells()[i];if(c)c.style.opacity=1},Math.max(15,500/T));
+ step(()=>{$('#spPh').textContent='2. Initialize: dp[0] = True';row.innerHTML=dpCells([true,...Array(T).fill(false)],{0:'up'})},900);
+ const dp=Array(T+1).fill(false);dp[0]=true;nums.forEach((x,ni)=>{const before=dp.slice();for(let s=T;s>=x;s--)dp[s]=dp[s]||dp[s-x];const cl={};dp.forEach((v,i)=>{if(v&&!before[i])cl[i]='up'});const snap=dp.slice();
+  step(()=>{$('#spPh').textContent=`3. Number ${x} (pass ${ni+1}/${n}) updates the SAME array`;row.innerHTML=dpCells(snap,cl)},1100)});
+ step(()=>{$('#spPh').textContent=`4. Done: one array of ${T+1} cells was reused for all ${n} numbers. dp[${T}] = ${dp[T]?'True':'False'}`},0)};spBuild();
+/* quiz */
+const Q=[['Why must the total sum be even?',['Because the array has an even length','Two equal integer sums add up to an even number (2 × half)','Python can\'t divide odd numbers','To make dp bigger'],1,'If both subsets sum to x, total = 2x, which is even.'],
+['Why is dp[0] initialized to True?',['Sum 0 can be made by choosing no elements','Because the first element is 0','So the loop runs','It marks the target'],0,'The empty subset sums to 0. Every other reachable sum grows from it.'],
+['What does dp[s] represent?',['Number of subsets with sum s','Whether sum s can be formed using the numbers processed so far','Largest subset ≤ s','The s-th element'],1,'It is a Boolean reachability flag, not a count.'],
+['Why do we iterate backwards?',['Backwards is faster','So each element is used at most once: dp[s − num] hasn\'t been updated by this num yet','To avoid odd totals','Because Python ranges require it'],1,'Forward iteration would let one element be counted several times (0/1 becomes unbounded).'],
+['What is the time complexity?',['O(n)','O(2ⁿ)','O(n × target)','O(target)'],2,'n numbers, each sweeping up to target sums. Space is O(target).']];
+const qz={i:0,s:0,done:false};
+function qR(){const box=$('#qz');if(qz.i>=Q.length){box.innerHTML=`<h3>Score: ${qz.s} / ${Q.length}</h3><p class="mut">${qz.s===5?'Perfect. You get 0/1 subset-sum DP.':qz.s>=3?'Good work. Review the explanations you missed.':'Revisit the backward-iteration section and the visualizer.'}</p><button class="p" id="qRe">Retry</button>`;$('#qRe').onclick=()=>{qz.i=qz.s=0;qR()};return}
+ const q=Q[qz.i];qz.done=false;box.innerHTML=`<p class="mut">Question ${qz.i+1} of ${Q.length} · Score ${qz.s}</p><b>${q[0]}</b>`+q[1].map((t,k)=>`<button class="opt" data-k="${k}">${t}</button>`).join('')+'<p id="qf"></p><button id="qN" class="p" hidden>Next</button>';
+ $$('#qz .opt').forEach(b=>b.onclick=()=>{if(qz.done)return;qz.done=true;const k=+b.dataset.k,ok=k===q[2];if(ok)qz.s++;b.classList.add(ok?'ok':'bad');if(!ok)$$('#qz .opt')[q[2]].classList.add('ok');$('#qf').innerHTML=`<span class="${ok?'good':'err'}">${ok?'Correct.':'Not quite.'}</span> ${q[3]}`;const n=$('#qN');n.hidden=false;n.textContent=qz.i===Q.length-1?'See results':'Next';n.onclick=()=>{qz.i++;qR()}})}
+qR();
+/* recap flow */
+{const F=['Array','Calculate total','Check whether total is even','Calculate target = total / 2','Initialize DP: dp[0] = True','Process every number','Iterate backwards','Check dp[target]'];
+ $('#flow').innerHTML=F.map((t,i)=>(i?'<div class="ar" style="transition-delay:'+(i*.18-.09)+'s">↓</div>':'')+`<div style="transition-delay:${i*.18}s">${t}</div>`).join('');io.observe($('#flow'))}
+})();
+</script></body></html>
